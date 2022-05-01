@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Scopes\ClientScope;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,4 +49,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+
+    // protected static function booted()
+    // {
+    //     static::addGlobalScope(new ClientScope);
+    // }
+
+    
 }
