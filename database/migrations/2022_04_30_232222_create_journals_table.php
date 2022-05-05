@@ -15,17 +15,20 @@ class CreateJournalsTable extends Migration
     {
         Schema::create('journals', function (Blueprint $table) {
             $table->id();
-            $table->string('entry_date');
+            $table->date('entry_date');
             $table->string('entry_time');
-            $table->string('exit_date');
+            $table->date('exit_date');
             $table->string('position_nr');
             $table->string('symbol');
-            $table->string('type');
+            $table->enum('type',['sal' , 'buy']);
             $table->string('size');
-            $table->string('s/l');
-            $table->string('t/p');
-            $table->string('profit');
-            $table->string('desc');
+            $table->float('entry_price');
+            $table->float('s/l');
+            $table->float('t/p');
+            $table->float('exit_price');
+            $table->float('profit');
+            $table->longText('desc');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

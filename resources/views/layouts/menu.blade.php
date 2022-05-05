@@ -85,23 +85,23 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-text">File Upload</span>
+                    <span class="menu-text">Journal</span>
                     <i class="menu-arrow"></i>
                 </a>
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
                     <ul class="menu-subnav">
-                       {{-- @can('show_info')
+                       @can('show_info')
                          <li class="menu-item" aria-haspopup="true">
-                            <a href="{{route('races.index')}}" class="menu-link">
+                            <a href="{{route('journal.index')}}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>
-                                <span class="menu-text">All Races information</span>
+                                <span class="menu-text">journal information</span>
                             </a>
                         </li>  
-                       @endcan  --}}
-                       {{-- @can('upload_excel')
+                       @endcan  
+                        {{-- @can('upload_excel')
                           <li class="menu-item" aria-haspopup="true">
                             <a href="{{route('races.create')}}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">

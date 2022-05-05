@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Journal;
 use App\Http\Requests\StoreJournalRequest;
 use App\Http\Requests\UpdateJournalRequest;
@@ -15,8 +14,10 @@ class JournalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $journals = Journal::all();
+        return view('admin.journal.index')
+        ->withJournals($journals);
     }
 
     /**
@@ -26,7 +27,7 @@ class JournalController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.journal.create');
     }
 
     /**

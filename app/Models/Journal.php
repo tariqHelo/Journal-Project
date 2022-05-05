@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\ClientScope;
 
 class Journal extends Model
 {
@@ -19,11 +20,17 @@ class Journal extends Model
         'symbol',
         'type',
         'size',
+        'entry_price',
         's/l',
         't/p',
+        'exit_price',
         'profit',
-        'desc',
-        
+        'desc', 
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new ClientScope);
+    }  
 
 }

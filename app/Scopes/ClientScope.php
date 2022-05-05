@@ -17,6 +17,6 @@ class ClientScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->where('created_at', '<', now()->subYears(2000));
+        $builder->where('user_id', \Auth::user()->id);
     }
 }

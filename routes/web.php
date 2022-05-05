@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\{
     RolesController,
     UsersController,
 };
+use App\Http\Controllers\JournalController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,5 +30,7 @@ Route::group(['middleware' => 'auth'] , function () {
     Route::resource('roles', RolesController::class);
     // Users
     Route::resource('users', UsersController::class);
+    // Users
+    Route::resource('journal', JournalController::class);
 }); 
 require __DIR__.'/auth.php';
