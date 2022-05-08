@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateJournalRequest;
 class JournalController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      *
      * @return \Illuminate\Http\Response
      */
