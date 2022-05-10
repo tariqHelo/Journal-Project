@@ -12,7 +12,6 @@ class Journal extends Model
     use HasFactory;
 
      protected $fillable = [
-
         'entry_date',
         'entry_time',
         'exit_date',
@@ -25,12 +24,24 @@ class Journal extends Model
         't/p',
         'exit_price',
         'profit',
-        'desc', 
+        'desc',
+        'user_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        
+        self::creating(function($model){
+          $model->user_id = auth()->id;
+        });
+    }
 
     protected static function booted()
     {
         static::addGlobalScope(new ClientScope);
     }  
+
+    
 
 }

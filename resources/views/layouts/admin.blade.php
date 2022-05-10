@@ -295,7 +295,7 @@
 											</div> --}}
 											<!--end::Card-->
 											<!--begin::Code example-->
-											{{-- <div class="col-lg-6">
+											<div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -486,7 +486,7 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div> --}}
+											</div>
 										</div>		
 						    	</div>
 							<!--end::Container-->

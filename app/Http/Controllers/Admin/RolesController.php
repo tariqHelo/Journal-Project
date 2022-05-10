@@ -8,6 +8,7 @@ use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,7 +59,7 @@ class RolesController extends Controller
         ]);
     }
 
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(Request $request, Role $role)
     {
         $role->update($request->all());
         $role->permissions()->sync($request->input('permissions', []));
