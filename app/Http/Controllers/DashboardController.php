@@ -15,15 +15,26 @@ class DashboardController extends Controller
     public function index()
     {   
        $date = Carbon::now();
-        $event = Journal::query()->whereDate('created_at', '=', (new Carbon)->format('Y-m-d'))->get();
-        $events = collect($event)->map(function ($events) {
+       $event = Journal::query()->whereDate('entry_date', '2022-05-08')->select('created_at')->get();
+       $events = collect($event)->map(function ($events) {
             return [
-                 'created_at' => $events->created_at,
-                //  'amount' => $accounts->amount,
-                //  'bank_name' => $accounts->bank->name,
+                [
+                 //  'title' => (Count)=>it's mean how many inputs for every day,
+                 //   'start' => this side contain Date Today or yesterdat,
+                ],
+                [
+                 //  'title' => (Sum Count)=> if has multiple values entered from day,
+                 //   'start' => this side contain Date Today or yesterdat,
+                ],
+                [
+                 //  'title' => (Win Rate)= "Empty",
+                 //   'start' => this side contain Date Today or yesterdat,
+                ],
+
+                 
             ];
         });
- //       dd($event);
+      // dd($event);
         //   events:
         //    [
         //                         {
@@ -50,74 +61,6 @@ class DashboardController extends Controller
         //                             start: YM + '-03',
         //                             description: 'Lorem ipsum dolor sit tempor inci',
         //                             className: "fc-event-light fc-event-solid-primary"
-        //                         },
-        //                         {
-        //                             title: 'Dinner',
-        //                             start: YM + '-12',
-        //                             description: 'Lorem ipsum dolor sit amet, conse ctetur',
-        //                         },
-        //                         {
-        //                             id: 999,
-        //                             title: 'Repeating Event',
-        //                             start: YM + '-09T16:00:00',
-        //                             description: 'Lorem ipsum dolor sit ncididunt ut labore',
-        //                             className: "fc-event-danger"
-        //                         },
-        //                         {
-        //                             id: 1000,
-        //                             title: 'Repeating Event',
-        //                             description: 'Lorem ipsum dolor sit amet, labore',
-        //                             start: YM + '-16T16:00:00'
-        //                         },
-        //                         {
-        //                             title: 'Count  ' + "Win Rate",
-        //                             start: TODAY ,
-        //                              className: "fc-event-info",
-        //                             // end: TODAY + 'T12:30:00',
-        //                             description: 'Lorem ipsum dolor eiu idunt ut labore'
-        //                         },
-        //                         {
-        //                             title: 'Pnl',
-        //                             start: TODAY ,
-        //                             className: "fc-event-info",
-        //                             description: 'Lorem ipsum dolor sit amet, ut labore'
-        //                         },
-        //                         {
-        //                             title: 'Max DO',
-        //                             start: TODAY ,
-        //                             className: "fc-event-warning",
-        //                             description: 'Lorem ipsum conse ctetur adipi scing'
-        //                         },
-        //                         {
-        //                             title: 'Max Gain',
-        //                             start: TODAY ,
-        //                             className: "fc-event-info",
-        //                             description: 'Lorem ipsum dolor sit amet, conse ctetur'
-        //                         },
-        //                         {
-        //                             title: 'Dinner',
-        //                             start: TOMORROW ,
-        //                             className: "fc-event-solid-danger fc-event-light",
-        //                             description: 'Lorem ipsum dolor sit ctetur adipi scing'
-        //                         },
-        //                         {
-        //                             title: 'wwwww',
-        //                             start: TOMORROW ,
-        //                             className: "fc-event-solid-danger fc-event-light",
-        //                             description: 'Lorem ipsum dolor sit ctetur adipi scing'
-        //                         },
-        //                         {
-        //                             title: 'Birthday Party',
-        //                             start: TOMORROW + 'T07:00:00',
-        //                             className: "fc-event-primary",
-        //                             description: 'Lorem ipsum dolor sit amet, scing'
-        //                         },
-        //                         {
-        //                             title: 'Click for Google',
-        //                             url: 'http://google.com/',
-        //                             start: YM + '-28',
-        //                             className: "fc-event-solid-info fc-event-light",
-        //                             description: 'Lorem ipsum dolor sit amet, labore'
         //                         }
         //    ],
        return view('admin.calender.index');  
