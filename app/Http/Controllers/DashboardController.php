@@ -15,7 +15,8 @@ class DashboardController extends Controller
     public function index()
     {   
        $date = Carbon::now();
-       $event = Journal::query()->whereDate('entry_date', '2022-05-08')->select('created_at')->get();
+       $event = Journal::query()->whereDate('created_at', Carbon::now()->subHour())->get();
+       dd($event);
        $events = collect($event)->map(function ($events) {
             return [
                 [
