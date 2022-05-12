@@ -57,9 +57,24 @@ class DashboardController extends Controller
             ];
         });
        return [
-           'daily' => $hoursData,
-           'weekly' => $weekData,
-           'monthly' => $monthData,
+           'day' => [
+               'date' => today()->format('Y.m.d'),
+               'data' => $hoursData,
+           ],
+           'weekly' => [
+               'period' => [
+                   'from' => now()->startOfWeek()->format('Y.m.d'),
+                   'to' => now()->endOfWeek()->format('Y.m.d'),
+               ],
+               'data' => $weekData,
+           ],
+           'monthly' => [
+               'period' => [
+                   'from' => now()->startOfMonth()->format('Y.m.d'),
+                   'to' => now()->endOfMonth()->format('Y.m.d'),
+               ],
+               'data' => $monthData,
+           ],
        ];
 
        return view('admin.calender.index');
