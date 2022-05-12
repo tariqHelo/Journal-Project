@@ -10,61 +10,59 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Support\Collection
      */
     public function index()
-    {   
+    {
        $date = Carbon::now();
-       $event = Journal::query()->whereDate('created_at', Carbon::now()->subHour())->get();
-       dd($event);
-       $events = collect($event)->map(function ($events) {
-            return [
-                [
-                 //  'title' => (Count)=>it's mean how many inputs for every day,
-                 //   'start' => this side contain Date Today or yesterdat,
-                ],
-                [
-                 //  'title' => (Sum Count)=> if has multiple values entered from day,
-                 //   'start' => this side contain Date Today or yesterdat,
-                ],
-                [
-                 //  'title' => (Win Rate)= "Empty",
-                 //   'start' => this side contain Date Today or yesterdat,
-                ],
 
-                 
+       //daily records via hours
+       $events = Journal::query()->whereDate('created_at', today())->get()->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('h');
+        });
+
+       $hoursData =  collect($events)->values()->map(function ($event) {
+           return [
+               'hour' => Carbon::parse($event[0]->created_at)->format('h a'),
+               'count' => $event->count(),
+               'pnl' => $event->sum('profit')
+           ];
+        });
+
+
+        //weekly records via days
+
+        $week_events = Journal::query()->whereBetween('created_at', [now()->startOfWeek(Carbon::SATURDAY), now()->endOfWeek(Carbon::FRIDAY)])->get()->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('d');
+        });
+        $weekData =  collect($week_events)->values()->map(function ($event) {
+            return [
+                'day' => Carbon::parse($event[0]->created_at)->format('l'),
+                'count' => $event->count(),
+                'pnl' => $event->sum('profit'),
             ];
         });
-      // dd($event);
-        //   events:
-        //    [
-        //                         {
-        //                             title: 'All Day Event',
-        //                             start: YM + '-01',
-        //                             description: 'Toto lorem ipsum dolor sit incid idunt ut',
-        //                             className: "fc-event-danger fc-event-solid-warning"
-        //                         },
-        //                         {
-        //                             title: 'Reporting',
-        //                             start: YM + '-14T13:30:00',
-        //                             description: 'Lorem ipsum dolor incid idunt ut labore',
-        //                             end: YM + '-14',
-        //                             className: "fc-event-success"
-        //                         },
-        //                         {
-        //                             title: 'Company Trip',
-        //                             start: YM + '-02',
-        //                             description: 'Lorem ipsum dolor sit tempor incid',
-        //                             className: "fc-event-primary"
-        //                         },
-        //                         {
-        //                             title: 'ICT Expo 2017 - Product Release',
-        //                             start: YM + '-03',
-        //                             description: 'Lorem ipsum dolor sit tempor inci',
-        //                             className: "fc-event-light fc-event-solid-primary"
-        //                         }
-        //    ],
-       return view('admin.calender.index');  
+
+        //montly records via days
+
+        $month_events = Journal::query()->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])->get()->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('d');
+        });
+        $monthData =  collect($month_events)->values()->map(function ($event) {
+            return [
+                'day' => Carbon::parse($event[0]->created_at)->format('l'),
+                'date' => Carbon::parse($event[0]->created_at)->format('Y.m.d'),
+                'count' => $event->count(),
+                'pnl' => $event->sum('profit'),
+            ];
+        });
+       return [
+           'daily' => $hoursData,
+           'weekly' => $weekData,
+           'monthly' => $monthData,
+       ];
+
+       return view('admin.calender.index');
     }
 
     /**
