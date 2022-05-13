@@ -105,7 +105,7 @@
                        @endcan  
                         @can('upload_excel')
                           <li class="menu-item" aria-haspopup="true">
-                            <a href="{{route('calender.index')}}" class="menu-link">
+                            <a href="{{url('/test')}}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>

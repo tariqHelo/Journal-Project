@@ -14,56 +14,41 @@ class DashboardController extends Controller
      */
     public function index()
     {   
-       $date = Carbon::now();
-       $event = Journal::query()->whereDate('entry_date', '2022-05-08')->select('created_at')->get();
-       $events = collect($event)->map(function ($events) {
-            return [
-                [
-                 //  'title' => (Count)=>it's mean how many inputs for every day,
-                 //   'start' => this side contain Date Today or yesterdat,
-                ],
-                [
-                 //  'title' => (Sum Count)=> if has multiple values entered from day,
-                 //   'start' => this side contain Date Today or yesterdat,
-                ],
-                [
-                 //  'title' => (Win Rate)= "Empty",
-                 //   'start' => this side contain Date Today or yesterdat,
-                ],
+       $t = Carbon::now();
+       $data = Journal::query()->get()->groupBy(function($t) {
+            return Carbon::parse($t->entry_date)->format('Y-m-d');
+        });
 
-                 
+      // dd($data->toArray());
+       $events = collect($data)->values()->map(function ($events)  {
+            return  [
+                   'title'     =>  $events->count(),
+                   'start'     => ($events[0]->entry_date),
+                  'className' => "fc-event-danger fc-event-solid-warning",
+                  //count of tarde // Done
+                  //pnl sum all profit
+                  //win rate 
             ];
         });
-      // dd($event);
-        //   events:
-        //    [
-        //                         {
-        //                             title: 'All Day Event',
-        //                             start: YM + '-01',
-        //                             description: 'Toto lorem ipsum dolor sit incid idunt ut',
-        //                             className: "fc-event-danger fc-event-solid-warning"
-        //                         },
-        //                         {
-        //                             title: 'Reporting',
-        //                             start: YM + '-14T13:30:00',
-        //                             description: 'Lorem ipsum dolor incid idunt ut labore',
-        //                             end: YM + '-14',
-        //                             className: "fc-event-success"
-        //                         },
-        //                         {
-        //                             title: 'Company Trip',
-        //                             start: YM + '-02',
-        //                             description: 'Lorem ipsum dolor sit tempor incid',
-        //                             className: "fc-event-primary"
-        //                         },
-        //                         {
-        //                             title: 'ICT Expo 2017 - Product Release',
-        //                             start: YM + '-03',
-        //                             description: 'Lorem ipsum dolor sit tempor inci',
-        //                             className: "fc-event-light fc-event-solid-primary"
-        //                         }
-        //    ],
-       return view('admin.calender.index');  
+       
+       $pnl = collect($data)->values()->map(function ($events)  {
+            return  [
+                   'title'     =>  $events->sum('profit'),
+                   'start'     => ($events[0]->entry_date),
+                   'className' => "fc-event-danger fc-event-solid-warning",
+                  //count of tarde // Done
+                  //pnl sum all profit
+                  //win rate 
+            ];
+        });
+
+    dd($pnl);
+
+
+
+      ///  return response()->json(['events' => $events]);
+    //    return view('admin.calender.index',
+    // ['events' => $events]);  
     }
 
     /**
@@ -132,3 +117,15 @@ class DashboardController extends Controller
         //
     }
 }
+//    $events=[
+    //        ['title' => 'All Day Event','start' => '2022-05-12' , 'className' => "fc-event-danger fc-event-solid-warning"],
+    //        ['title' => 'ss','start' => '2022-05-12'],
+    //        ['title' => 'Count2','start' => '2022-05-08'],
+    //        ['title' => 'Count3','start' => '2022-05-07'],
+    //        ['title' => 'Count4','start' => '2022-05-03'],
+    //        ['title' => 'Count5','start' => '2022-05-02'],
+    //        ['title' => 'Count6','start' => '2022-05-01'],
+    //        ['title' => 'Count7','start' => '2022-05-10'],
+    //        ['title' => 'Count8','start' => '2022-05-09'],
+    //        ['title' => 'Count9','start' => '2022-05-08'],
+    //    ];
