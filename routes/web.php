@@ -27,6 +27,11 @@ Route::group(['middleware' => 'auth'] , function () {
      return view('layouts.admin');
     })->name('dashboard');
 
+
+    Route::get('/test', function () {
+     return view('admin.calender.index');
+    });
+
     // Permissions
     Route::resource('permissions', PermissionsController::class);
     // Roles

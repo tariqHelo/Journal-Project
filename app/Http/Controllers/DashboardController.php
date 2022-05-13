@@ -13,71 +13,42 @@ class DashboardController extends Controller
      * @return \Illuminate\Support\Collection
      */
     public function index()
-    {
-       $date = Carbon::now();
-
-       //daily records via hours
-       $events = Journal::query()->whereDate('created_at', today())->get()->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('h');
+    {   
+       $t = Carbon::now();
+       $data = Journal::query()->get()->groupBy(function($t) {
+            return Carbon::parse($t->entry_date)->format('Y-m-d');
         });
 
-       $hoursData =  collect($events)->values()->map(function ($event) {
-           return [
-               'hour' => Carbon::parse($event[0]->created_at)->format('h a'),
-               'count' => $event->count(),
-               'pnl' => $event->sum('profit')
-           ];
+      // dd($data->toArray());
+       $events = collect($data)->values()->map(function ($events)  {
+            return  [
+                   'title'     =>  $events->count(),
+                   'start'     => ($events[0]->entry_date),
+                  'className' => "fc-event-danger fc-event-solid-warning",
+                  //count of tarde // Done
+                  //pnl sum all profit
+                  //win rate 
+            ];
         });
-
-
-        //weekly records via days
-
-        $week_events = Journal::query()->whereBetween('created_at', [now()->startOfWeek(Carbon::SATURDAY), now()->endOfWeek(Carbon::FRIDAY)])->get()->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('d');
-        });
-        $weekData =  collect($week_events)->values()->map(function ($event) {
-            return [
-                'day' => Carbon::parse($event[0]->created_at)->format('l'),
-                'count' => $event->count(),
-                'pnl' => $event->sum('profit'),
+       
+       $pnl = collect($data)->values()->map(function ($events)  {
+            return  [
+                   'title'     =>  $events->sum('profit'),
+                   'start'     => ($events[0]->entry_date),
+                   'className' => "fc-event-danger fc-event-solid-warning",
+                  //count of tarde // Done
+                  //pnl sum all profit
+                  //win rate 
             ];
         });
 
-        //montly records via days
+    dd($pnl);
 
-        $month_events = Journal::query()->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])->get()->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('d');
-        });
-        $monthData =  collect($month_events)->values()->map(function ($event) {
-            return [
-                'day' => Carbon::parse($event[0]->created_at)->format('l'),
-                'date' => Carbon::parse($event[0]->created_at)->format('Y.m.d'),
-                'count' => $event->count(),
-                'pnl' => $event->sum('profit'),
-            ];
-        });
-       return [
-           'day' => [
-               'date' => today()->format('Y.m.d'),
-               'data' => $hoursData,
-           ],
-           'weekly' => [
-               'period' => [
-                   'from' => now()->startOfWeek()->format('Y.m.d'),
-                   'to' => now()->endOfWeek()->format('Y.m.d'),
-               ],
-               'data' => $weekData,
-           ],
-           'monthly' => [
-               'period' => [
-                   'from' => now()->startOfMonth()->format('Y.m.d'),
-                   'to' => now()->endOfMonth()->format('Y.m.d'),
-               ],
-               'data' => $monthData,
-           ],
-       ];
 
-       return view('admin.calender.index');
+
+      ///  return response()->json(['events' => $events]);
+    //    return view('admin.calender.index',
+    // ['events' => $events]);  
     }
 
     /**
@@ -146,3 +117,15 @@ class DashboardController extends Controller
         //
     }
 }
+//    $events=[
+    //        ['title' => 'All Day Event','start' => '2022-05-12' , 'className' => "fc-event-danger fc-event-solid-warning"],
+    //        ['title' => 'ss','start' => '2022-05-12'],
+    //        ['title' => 'Count2','start' => '2022-05-08'],
+    //        ['title' => 'Count3','start' => '2022-05-07'],
+    //        ['title' => 'Count4','start' => '2022-05-03'],
+    //        ['title' => 'Count5','start' => '2022-05-02'],
+    //        ['title' => 'Count6','start' => '2022-05-01'],
+    //        ['title' => 'Count7','start' => '2022-05-10'],
+    //        ['title' => 'Count8','start' => '2022-05-09'],
+    //        ['title' => 'Count9','start' => '2022-05-08'],
+    //    ];
