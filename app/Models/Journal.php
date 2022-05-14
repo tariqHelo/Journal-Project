@@ -23,25 +23,21 @@ class Journal extends Model
         's/l',
         't/p',
         'exit_price',
+        'commission',
+        'swap',
         'profit',
-        'desc',
+       // 'desc',
         'user_id'
     ];
-
     protected static function boot()
     {
         parent::boot();
-        
         self::creating(function($model){
           $model->user_id = auth()->id;
         });
     }
-
     protected static function booted()
     {
         static::addGlobalScope(new ClientScope);
     }  
-
-    
-
 }

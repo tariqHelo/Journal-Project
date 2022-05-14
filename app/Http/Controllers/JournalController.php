@@ -18,6 +18,9 @@ class JournalController extends Controller
         $journals = Journal::all();
         return view('admin.journal.index')
         ->withJournals($journals);
+
+
+        
     }
 
     /**

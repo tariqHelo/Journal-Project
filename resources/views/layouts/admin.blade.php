@@ -242,6 +242,126 @@
 										<!--begin::Dashboard-->
 										<!--begin::Row-->
 										<div class="row">
+											
+											<div class="col-xl-3">
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url('https://income.bti.ps/assets/media/svg/shapes/abstract-4.svg')">
+													<!--begin::Body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total PnL</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">${{$profit->pnl}}</p>
+													</div>
+													<!--end::Body-->
+												</div>
+											</div>
+											<div class="col-xl-3">
+												<!--begin::Stats Widget 2-->
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-2.svg)">
+													<!--begin::Body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total Profit</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->positive}}</p>
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Stats Widget 2-->
+											</div>
+											<div class="col-xl-3">
+												<!--begin::Stats Widget 3-->
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-1.svg)">
+													<!--begin::body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total Loss</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->negative}}</p>
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Stats Widget 3-->
+											</div>
+											<div class="col-xl-3">
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url('https://income.bti.ps/assets/media/svg/shapes/abstract-4.svg')">
+													<!--begin::Body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Win Rate</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">20%</p>
+													</div>
+													<!--end::Body-->
+												</div>
+											</div>
+											<div class="col-xl-4">
+												<!--begin::Stats Widget 2-->
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-2.svg)">
+													<!--begin::Body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">of Trades</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->trades}}</p>
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Stats Widget 2-->
+											</div>
+											<div class="col-xl-4">
+												<!--begin::Stats Widget 3-->
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-1.svg)">
+													<!--begin::body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total R</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">0</p>
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Stats Widget 3-->
+											</div>
+											<div class="col-xl-4">
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url('https://income.bti.ps/assets/media/svg/shapes/abstract-4.svg')">
+													<!--begin::Body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average R:R</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">$2247</p>
+													</div>
+													<!--end::Body-->
+												</div>
+											</div>
+											<div class="col-xl-4">
+												<!--begin::Stats Widget 2-->
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-2.svg)">
+													<!--begin::Body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average PnL per Trade</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">8</p>
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Stats Widget 2-->
+											</div>
+											<div class="col-xl-4">
+												<!--begin::Stats Widget 3-->
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-1.svg)">
+													<!--begin::body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average Daily PnL</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">0</p>
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Stats Widget 3-->
+											</div>
+											<div class="col-xl-4">
+												<!--begin::Stats Widget 3-->
+												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-1.svg)">
+													<!--begin::body-->
+													<div class="card-body">
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average Trade PnL</h5>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">0</p>
+													</div>
+													<!--end::Body-->
+												</div>
+												<!--end::Stats Widget 3-->
+											</div>
+
+
+											
+
+
 											<div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
@@ -488,14 +608,7 @@
 												<!--end::Card-->
 											</div>
 										</div>		
-						    	</div>
-							<!--end::Container-->
-						</div>
-						<!--end::Entry-->
-					</div>
-										</div>
-										<!--end::Row-->
-										<!--end::Dashboard-->
+								
 									@endif	
 								</div>
 							<!--end::Container-->

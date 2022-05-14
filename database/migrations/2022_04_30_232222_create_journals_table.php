@@ -26,8 +26,10 @@ class CreateJournalsTable extends Migration
             $table->float('s/l');
             $table->float('t/p');
             $table->float('exit_price');
+            $table->float('commission');
+            $table->float('swap');
             $table->float('profit');
-            $table->longText('desc');
+           // $table->longText('desc');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

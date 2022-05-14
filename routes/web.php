@@ -6,9 +6,12 @@ use App\Http\Controllers\Admin\{
     RolesController,
     UsersController,
 };
-use App\Http\Controllers\JournalController;
+use App\Http\Controllers\{
+    JournalController,
+    CalenderController,
+    DashboardController
+};
 
-use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -23,9 +26,10 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::group(['middleware' => 'auth'] , function () {
-   Route::get('/', function () {
-     return view('layouts.admin');
-    })->name('dashboard');
+//    Route::get('/', function () {
+//      return view('layouts.admin');
+//     })->name('dashboard');
+    Route::get('/', [DashboardController::class , 'index'])->name('dashboard');
 
 
     Route::get('/test', function () {
@@ -41,6 +45,6 @@ Route::group(['middleware' => 'auth'] , function () {
     // Users
     Route::resource('journal', JournalController::class);
      // Users
-    Route::resource('calender', DashboardController::class);
+    Route::resource('calender', CalenderController::class);
 }); 
 require __DIR__.'/auth.php';

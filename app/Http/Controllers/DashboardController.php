@@ -14,42 +14,14 @@ class DashboardController extends Controller
      */
     public function index()
     {   
-        $t = Carbon::now();
-       $data = Journal::query()->get()->groupBy(function($t) {
-            return Carbon::parse($t->entry_date)->format('Y-m-d');
-        });
-       $events = collect($data)->values()->map(function ($events)  {
-            return  [
-                   'title'     =>  'Count'.':' .' '.$events->count(),
-                   'start'     => ($events[0]->entry_date),
-                   'className' => "fc-event-danger fc-event-solid-warning",
-            ];
-        });
-       $pnl = collect($data)->values()->map(function ($pnl)  {
-            return  [
-                   'title'     =>   'PnL'.':' .' $'.$pnl->sum('profit'),
-                   'start'     => ($pnl[0]->entry_date),
-                   'className' => "fc-event-light fc-event-solid-primary",
-                  //count of tarde // Done
-                  //pnl sum all profit //Done
-                  //win rate 
-            ];
-        });
-        $rate = collect($data)->values()->map(function ($rate)  {
-            return  [
-                    'title'     =>  'Win Rate'.':'. ' '.$rate->count() / $rate->sum('profit').'%',
-                //    'title'     =>   'Win Rate'.':'. ' '.$rate->avg('profit') .'%',
-                   'start'     => ($rate[0]->entry_date),
-                   'className' => "fc-event-solid-info fc-event-light",
-                  //count of tarde // Done
-                  //pnl sum all profit //Done
-                  //win rate //Done
-            ];
-        });
-
-     $allItems = $events->merge($pnl)->merge($rate);
-     dd($allItems);
-     return response()->json(['events' => $allItems]);
+      // $item = Journal::query()->where('profit' ,'<' ,0)->sum('profit');
+      $profit = Journal::query()->toBase()
+            ->selectRaw("count(*) AS trades, "."SUM(profit) AS pnl, "."SUM(CASE WHEN profit < 0 THEN profit ELSE 0 END) AS negative, " .
+                "SUM(CASE WHEN profit > 0 THEN profit ELSE 0 END) AS positive")
+            ->first();
+       // dd($profit); 
+        return view('layouts.admin')
+        ->withProfit($profit);
      //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 
              // Count of 5 Trades have positive Profit,
              // Count of 5 Trades have negative Profit —>
@@ -63,8 +35,9 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+
+        return view('admin.statistics.index');
     }
 
     /**

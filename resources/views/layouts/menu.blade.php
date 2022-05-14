@@ -115,6 +115,19 @@
                                 </span>
                             </a>
                           </li>   
+                       @endcan
+                       @can('upload_excel')
+                          <li class="menu-item" aria-haspopup="true">
+                            <a href="{{route('calender.create')}}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">statistics</span>
+                                <span class="menu-label">
+                                    <span class="label label-danger label-inline">new</span>
+                                </span>
+                            </a>
+                          </li>   
                        @endcan 
                           
                     </ul>
