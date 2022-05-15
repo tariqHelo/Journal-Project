@@ -14,6 +14,12 @@ class DashboardController extends Controller
      */
     public function index()
     {   
+        $profits = Journal::query()->toBase()
+            ->selectRaw("count(case when profit < 0 then 1 end) as neg")
+            ->selectRaw("count(case when profit > 0 then 1 end) as pos")
+            ->selectRaw("CAST(count(case when profit > 0 then 1 end)/count(*)*100 AS INTEGER) as a")
+            ->first();
+        dd($profits);
       // $item = Journal::query()->where('profit' ,'<' ,0)->sum('profit');
       $profit = Journal::query()->toBase()
             ->selectRaw("count(*) AS trades, "."SUM(profit) AS pnl, "."SUM(CASE WHEN profit < 0 THEN profit ELSE 0 END) AS negative, " .
