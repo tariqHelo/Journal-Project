@@ -30,7 +30,7 @@ class CreateJournalsTable extends Migration
             $table->float('swap');
             $table->float('profit');
            // $table->longText('desc');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

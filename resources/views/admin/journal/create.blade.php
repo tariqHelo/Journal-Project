@@ -97,8 +97,8 @@
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-10">
-                            <button type="reset" class="btn btn-success mr-2">Submit</button>
-                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                            <button type="submit" class="btn btn-success mr-2">Submit</button>
+                            <a href="{{route('journal.index')}}" class="btn btn-secondary">Cancel</a>
                         </div>
                     </div>
                 </div>

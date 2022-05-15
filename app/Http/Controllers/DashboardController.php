@@ -14,14 +14,17 @@ class DashboardController extends Controller
      */
     public function index()
     {   
-      // $item = Journal::query()->where('profit' ,'<' ,0)->sum('profit');
-      $profit = Journal::query()->toBase()
-            ->selectRaw("count(*) AS trades, "."SUM(profit) AS pnl, "."SUM(CASE WHEN profit < 0 THEN profit ELSE 0 END) AS negative, " .
-                "SUM(CASE WHEN profit > 0 THEN profit ELSE 0 END) AS positive")
+        $profit = Journal::query()->toBase()
+            ->selectRaw("SUM(profit) AS pnl")
+            ->selectRaw("count(*) AS trades")
+            ->selectRaw("AVG(swap) AS AvgPnl")
+            ->selectRaw("AVG(swap) / count(*)  AS AvgDaily") 
+            ->selectRaw("count(case when profit < 0 then 1 end) as neg")
+            ->selectRaw("count(case when profit > 0 then 1 end) as pos")
             ->first();
-       // dd($profit); 
-        return view('layouts.admin')
-        ->withProfit($profit);
+        dd($profit);
+        // return view('layouts.admin')
+        // ->withProfit($profit);
      //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 
              // Count of 5 Trades have positive Profit,
              // Count of 5 Trades have negative Profit —>

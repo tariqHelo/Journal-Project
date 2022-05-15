@@ -248,7 +248,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total PnL</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">${{$profit->pnl}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">${{$profit->pnl ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -259,7 +259,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total Profit</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->positive}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->pos ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -271,7 +271,7 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total Loss</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->negative}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->neg ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -293,7 +293,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">of Trades</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->trades}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->trades ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
