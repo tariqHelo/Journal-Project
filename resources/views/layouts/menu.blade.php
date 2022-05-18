@@ -127,7 +127,18 @@
                                     <span class="label label-danger label-inline">new</span>
                                 </span>
                             </a>
-                          </li>   
+                          </li>
+                          <li class="menu-item" aria-haspopup="true">
+                            <a href="{{route('statistics.index')}}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text">Statistics</span>
+                                <span class="menu-label">
+                                    <span class="label label-danger label-inline">new</span>
+                                </span>
+                            </a>
+                          </li>    
                        @endcan 
                           
                     </ul>

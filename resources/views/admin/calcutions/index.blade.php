@@ -35,25 +35,24 @@
                             <th>Risk Ticks</th>
                             <th>Account Balance</th>
                             <th>Trade Duration</th>
-                            <th>Actions</th>
+                            {{-- <th>Actions</th> --}}
                         </tr>
                     </thead>
                     <tbody>
                            
-                            {{-- @foreach ($journals as $key => $journal)
+                            @foreach ($calcs as $key => $calc)
                                 <tr> 
-                                    <td>{{++$key}}</td>
-                                    <td>{{$journal->entry_date}}</td>
-                                    <td>{{$journal->entry_time}}</td>
-                                    <td>{{$journal->exit_date}}</td>
-                                    <td>{{$journal->position_nr}}</td>
-                                    <td>{{$journal->symbol}}</td>
-                                    <td>{{$journal->type}}</td>
-                                    <td>{{$journal->size}}</td>
-                        
-                                    <td nowrap="nowrap"></td>
+                                    <td>{{$calc['pnL_per_lot']}}</td>
+                                    <td>{{$calc['ticks']}}</td>
+                                    <td>{{$calc['Value']}}</td>
+                                    <td>{{$calc['TP_Ticks']}}</td>
+                                    <td>{{$calc['SL_Ticks']}}</td>
+                                    <td>{{$calc['Risk_Ticks']}}</td>
+                                    <td>{{$calc['Account_Balance']}}</td>
+                                    <td>{{$calc['Trade_Duration']}}</td>
+                                    {{-- <td nowrap="nowrap"></td> --}}
                                 </tr>
-                            @endforeach                       --}}
+                            @endforeach                      
                     </tbody>
                 </table>
                 <!--end: Datatable-->

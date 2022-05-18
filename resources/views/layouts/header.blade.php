@@ -6,7 +6,7 @@
             <!--begin::Header Menu-->
             <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
                 <!--begin::Header Nav-->
-                {{-- <ul class="menu-nav">
+                <ul class="menu-nav">
                      <li class="nav-item">
                     <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -15,7 +15,7 @@
                             @csrf
                         </form>
                     </a>
-                </li> --}}
+                </li>
                 
                 </ul>
                 <!--end::Header Nav-->
@@ -86,9 +86,9 @@
                
                 <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
                     <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
+                    <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{\Auth::user()->name}}</span>
                     <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                        <span class="symbol-label font-size-h5 font-weight-bold">S</span>
+                        <span class="symbol-label font-size-h5 font-weight-bold">{{\Auth::user()->name[0]}}</span>
                     </span>
                 </div>
                 

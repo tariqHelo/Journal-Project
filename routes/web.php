@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     JournalController,
     CalenderController,
     DashboardController,
-    CalculationsController
+    CalculationsController,
+    StatisticsController
 };
 
 
@@ -47,5 +48,7 @@ Route::group(['middleware' => 'auth'] , function () {
     Route::resource('calender', CalenderController::class);
      // Calculations
     Route::resource('calc', CalculationsController::class);
+     // Calculations
+    Route::resource('statistics', StatisticsController::class);
 }); 
 require __DIR__.'/auth.php';

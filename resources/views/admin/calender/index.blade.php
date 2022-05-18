@@ -102,9 +102,9 @@
                             defaultView: 'dayGridMonth',
                             defaultDate: TODAY,
 
-                            editable: true,
-                            eventLimit: true, // allow "more" link when too many events
-                            navLinks: true,
+                            // editable: true,
+                            // eventLimit: true, // allow "more" link when too many events
+                            // navLinks: true,
                             events: data.events
                         });
                         calendar.render();

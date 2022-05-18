@@ -630,6 +630,8 @@
 		<script src="{{asset('assets/admin/js/pages/widgets.js')}}"></script>
 		<!--begin::Page Vendors(used by this page)-->
 		<script src="{{asset('assets/admin/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+		<!--begin::Page Scripts(used by this page)-->
+		<script src="{{asset('assets/admin/js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/admin/js/pages/crud/datatables/data-sources/html.js')}}"></script>

@@ -21,10 +21,10 @@ class CreateJournalsTable extends Migration
             $table->string('position_nr');
             $table->string('symbol');
             $table->enum('type',['sal' , 'buy']);
-            $table->string('size');
+            $table->float('size');
             $table->float('entry_price');
-            $table->float('s/l');
-            $table->float('t/p');
+            $table->float('s_l');
+            $table->float('t_p');
             $table->float('exit_price');
             $table->float('commission');
             $table->float('swap');
