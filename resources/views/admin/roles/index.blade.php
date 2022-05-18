@@ -43,11 +43,7 @@
                                 @endforeach
                             </td>
                             <td>
-                                {{-- @can('role_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('roles.show', $role->id) }}">
-                                        مشاهدة
-                                    </a>
-                                @endcan --}}
+                            
                                 @can('role_edit')
                                     <a class="btn btn-xs btn-info" href="{{ route('roles.edit', $role->id) }}">
                                         Edit
@@ -64,7 +60,7 @@
                             </td>
 
                         </tr>
-                      @endforeach	
+                    @endforeach	
 				</tbody>
 			</table>
 			<!--end: Datatable-->

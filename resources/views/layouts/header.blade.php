@@ -6,7 +6,7 @@
             <!--begin::Header Menu-->
             <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
                 <!--begin::Header Nav-->
-                <ul class="menu-nav">
+                {{-- <ul class="menu-nav">
                      <li class="nav-item">
                     <a href="#" class="nav-link" onclick="document.getElementById('logout-form').submit()">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -15,7 +15,7 @@
                             @csrf
                         </form>
                     </a>
-                </li>
+                </li> --}}
                 
                 </ul>
                 <!--end::Header Nav-->

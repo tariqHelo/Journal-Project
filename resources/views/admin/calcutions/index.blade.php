@@ -4,7 +4,7 @@
         @include('shared.msg')
         <!--begin::Card-->
             
-        {{-- <div class="card card-custom">
+        <div class="card card-custom">
             <div class="card-header">
                 <div class="card-title">
                     <span class="card-icon">
@@ -27,29 +27,20 @@
                 <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
                     <thead>
                         <tr> 
-                            <th>Trade</th>
-                            <th>Entry Date</th>
-                            <th>Entry Time</th>
-                            <th>Exit Date</th>
-
-                            <th>Position Nr</th>
-                            <th>Symbol</th>
-                            <th>Type</th>
-                            <th>Size</th>
-                            <th>entry_price</th>
-                            <th>S/l</th>
-                            <th>T/p</th>
-                            <th>exit_price</th>
-                            <th>Profit</th>
-                            <th>Comments</th>
-
-
+                            <th>PnL per Lot</th>
+                            <th>Ticks</th>
+                            <th>Value</th>
+                            <th>TP Ticks</th>
+                            <th>SL Ticks</th>
+                            <th>Risk Ticks</th>
+                            <th>Account Balance</th>
+                            <th>Trade Duration</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                            
-                            @foreach ($journals as $key => $journal)
+                            {{-- @foreach ($journals as $key => $journal)
                                 <tr> 
                                     <td>{{++$key}}</td>
                                     <td>{{$journal->entry_date}}</td>
@@ -59,21 +50,16 @@
                                     <td>{{$journal->symbol}}</td>
                                     <td>{{$journal->type}}</td>
                                     <td>{{$journal->size}}</td>
-                                    <td>{{$journal->entry_price}}</td>
-                                    <td>{{$journal->s_l}}</td>
-                                    <td>{{$journal->t_p}}</td>
-                                    <td>{{$journal->exit_price}}</td>
-                                    <td>{{$journal->profit}}</td>
-                                    <td>{{$journal->desc}}</td>
+                        
                                     <td nowrap="nowrap"></td>
                                 </tr>
-                            @endforeach                      
+                            @endforeach                       --}}
                     </tbody>
                 </table>
                 <!--end: Datatable-->
             </div>
-        </div> --}}
-		<div class="card">
+        </div>
+		{{-- <div class="card">
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
                         <h3 class="card-label">Journal Scrollbars
@@ -1281,7 +1267,7 @@
                     </table>
                     <!--end: Datatable-->
                 </div>
-        </div>
+        </div> --}}
         <!--end::Card-->
 					
 @endsection

@@ -9,7 +9,8 @@ use App\Http\Controllers\Admin\{
 use App\Http\Controllers\{
     JournalController,
     CalenderController,
-    DashboardController
+    DashboardController,
+    CalculationsController
 };
 
 
@@ -26,9 +27,7 @@ use App\Http\Controllers\{
 */
 
 Route::group(['middleware' => 'auth'] , function () {
-//    Route::get('/', function () {
-//      return view('layouts.admin');
-//     })->name('dashboard');
+
     Route::get('/', [DashboardController::class , 'index'])->name('dashboard');
 
 
@@ -42,9 +41,11 @@ Route::group(['middleware' => 'auth'] , function () {
     Route::resource('roles', RolesController::class);
     // Users
     Route::resource('users', UsersController::class);
-    // Users
+    // journal
     Route::resource('journal', JournalController::class);
-     // Users
+     // calender
     Route::resource('calender', CalenderController::class);
+     // Calculations
+    Route::resource('calc', CalculationsController::class);
 }); 
 require __DIR__.'/auth.php';

@@ -18,7 +18,7 @@ class UsersController extends Controller
        // dd(20);
        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::all();
+        $users = User::with('roles')->get();
         return view('admin.users.index', compact('users'));
     }
 

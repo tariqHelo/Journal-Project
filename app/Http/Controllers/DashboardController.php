@@ -15,20 +15,30 @@ class DashboardController extends Controller
     public function index()
     {   
         $profit = Journal::query()->toBase()
-            ->selectRaw("SUM(profit) AS pnl")
+             ->selectRaw("SUM(profit) AS pnl")
+          //  ->selectRaw("Date(created_at) = CURDATE()")
             ->selectRaw("count(*) AS trades")
-            ->selectRaw("AVG(swap) AS AvgPnl")
-            ->selectRaw("AVG(swap) / count(*)  AS AvgDaily") 
+            ->selectRaw("count(case when type = 'sal' then 1 end) as sal")
+            ->selectRaw("count(case when type = 'buy' then 1 end) as buy")
+            ->selectRaw("MAX(profit) as max")
+            ->selectRaw("MIN(profit) as min")
+            ->selectRaw("AVG(profit) AS AvgPnl")
+            ->selectRaw("AVG(profit) / count(*)  AS AvgDaily") 
             ->selectRaw("count(case when profit < 0 then 1 end) as neg")
             ->selectRaw("count(case when profit > 0 then 1 end) as pos")
             ->first();
-        dd($profit);
-        // return view('layouts.admin')
-        // ->withProfit($profit);
+        //dd($profit);
+        return view('layouts.admin')
+        ->withProfit($profit);
      //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 
              // Count of 5 Trades have positive Profit,
              // Count of 5 Trades have negative Profit —>
              // Win Rate = 50% // Same for the Calendar, just for the specific Date 
+
+             //Sum of Table 1 Column N for each day (based on Entry Date)
+             //Count of Entries for each unique Symbol (Table 1 - Column D / e.g.: EURUSD: 1, GBPUSD: 1
+             //Sum of Table 1 Column N for each Symbol
+             //Count of Trades including a Tag
 
     }
 
