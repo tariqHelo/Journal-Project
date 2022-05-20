@@ -27,26 +27,24 @@ class StatisticsController extends Controller
             return  [
                 
                 'key'             => ++$key,
-                'pnL_per_lot'     => $pnl   = round($result->profit / $result->size) , //Profit / Size
-                'ticks'           => $ticks = round($result->entry_price % $result->exit_price), //Difference between Entry Price and Exit Price 
-                'Value'           => $value =  ($pnl / $ticks), //PnL per Lot / Ticks
+                'entry_date'      => $result->entry_date,
+                'pnL_per_lot'     => $pnl   = ($result->profit / $result->size) , //Profit / Size
+                'ticks'           => $ticks = ($result->entry_price % $result->exit_price),//Difference between Entry Price and Exit Price 
+                'Value'           => $value = 20, //PnL per Lot / Ticks
                 'TP_Ticks'        => $TP =  $result->entry_price % $result->t_p, // Difference Entry price and T/P
                 'SL_Ticks'        => $result->entry_price % $result->s_l, //Difference between Entry price and S/L
+                   
+                  ///////////
 
-                // $pnL   = ($result->profit / $result->size),
-                // $ticks = ($result->entry_price % $result->exit_price),
-                // $value =   ($pnL / $ticks),
-                // $TP_Ticks =  $result->entry_price % $result->t_p,
-
-                'Risk/Reward'         => ($result->size * $value * $TP / $result->size * $value), // Planned Profit / $ Risk
-                'R'                   => ($result->profit / $result->size * $value),// $-Profit / $-Risk
-                'Risk'                => ($result->size * $value), //Size * Value * Risk Ricks
-                'Planned'             => ($result->size * $value * $TP), //Size * Value * TP Ticks
-                'Profit'              => $result->profit, // Entered by User
+                'Risk/Reward'         => round($result->size * $value * $TP / $result->size * $value,2), // Planned Profit / $ Risk
+                'R'                   => round($result->profit / $result->size * $value,2),// $-Profit / $-Risk
+                'Risk'                => round($result->size * $value,2), //Size * Value * Risk Ricks
+                'Planned'             => round($result->size * $value * $TP,2), //Size * Value * TP Ticks
+                'Profit'              => round($result->profit,2), // Entered by User
             ];
         });
 
-       // dd($result);
+        //dd($result);
         
         return view('admin.Statistics.index')->withResult($result);
     }

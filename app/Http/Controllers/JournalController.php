@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journal;
-use App\Http\Requests\StoreJournalRequest;
-use App\Http\Requests\UpdateJournalRequest;
+use App\Http\Requests\Journal\StoreJournalRequest;
+use App\Http\Requests\Journal\UpdateJournalRequest;
 
 class JournalController extends Controller
 {
@@ -16,6 +16,7 @@ class JournalController extends Controller
     public function index()
     {   
         $journals = Journal::all();
+       // dd($journals);
         return view('admin.journal.index')
         ->withJournals($journals);
     }
@@ -26,8 +27,11 @@ class JournalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.journal.create');
+    {   
+
+        return view('admin.journal.create',[
+            'journal' => new Journal()
+        ]);
     }
 
     /**
@@ -38,7 +42,10 @@ class JournalController extends Controller
      */
     public function store(StoreJournalRequest $request)
     {
-        //
+       // dd($request->all());
+        $journal = Journal::create($request->all());
+        \Session::flash("msg", "s:You are adedd Sucssfuly");
+        return redirect()->route('journal.index');
     }
 
     /**
@@ -60,7 +67,8 @@ class JournalController extends Controller
      */
     public function edit(Journal $journal)
     {
-        //
+        return view('admin.journal.edit')
+        ->withJournal($journal);
     }
 
     /**

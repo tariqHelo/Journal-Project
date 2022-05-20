@@ -478,120 +478,180 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
-											<div class="col-lg-6">
+											</div>--}}
+											{{-- Pie Chart Positive, Negative Profits --}}
+											<div class="col-lg-6" >
 												<!--begin::Card-->
-												<div class="card card-custom gutter-b">
-													<div class="card-header">
-														<div class="card-title">
-															<h3 class="card-label">Bubble Chart</h3>
-														</div>
-													</div>
-													<div class="card-body">
-														<!--begin::Chart-->
-														<div id="chart_8"></div>
-														<!--end::Chart-->
-													</div>
-												</div>
-												<!--end::Card-->
-											</div>
-											<div class="col-lg-6">
-												<!--begin::Card-->
-												<div class="card card-custom gutter-b">
-													<div class="card-header">
-														<div class="card-title">
-															<h3 class="card-label">Scatter Chart</h3>
-														</div>
-													</div>
-													<div class="card-body">
-														<!--begin::Chart-->
-														<div id="chart_9"></div>
-														<!--end::Chart-->
-													</div>
-												</div>
-												<!--end::Card-->
-											</div>
-											<div class="col-lg-6">
-												<!--begin::Card-->
-												<div class="card card-custom gutter-b">
-													<div class="card-header">
-														<div class="card-title">
-															<h3 class="card-label">Heatmap Chart</h3>
-														</div>
-													</div>
-													<div class="card-body">
-														<!--begin::Chart-->
-														<div id="chart_10"></div>
-														<!--end::Chart-->
-													</div>
-												</div>
-												<!--end::Card-->
-											</div>
-											<div class="col-lg-6">
-												<!--begin::Card-->
-												<div class="card card-custom gutter-b">
-													<div class="card-header">
-														<div class="card-title">
-															<h3 class="card-label">Donut Chart</h3>
-														</div>
-													</div>
-													<div class="card-body">
-														<!--begin::Chart-->
-														<div id="chart_11" class="d-flex justify-content-center"></div>
-														<!--end::Chart-->
-													</div>
-												</div>
-												<!--end::Card-->
-											</div>
-											<div class="col-lg-6">
-												<!--begin::Card-->
-												<div class="card card-custom gutter-b">
-													<div class="card-header">
-														<div class="card-title">
-															<h3 class="card-label">Pie Chart</h3>
-														</div>
-													</div>
-													<div class="card-body">
-														<!--begin::Chart-->
-														<div id="chart_12" class="d-flex justify-content-center"></div>
-														<!--end::Chart-->
-													</div>
-												</div>
-												<!--end::Card-->
-											</div> --}}
-											{{-- <div class="col-lg-6">
-												<!--begin::Card-->
-												<div class="card card-custom gutter-b">
-													<div class="card-header">
-														<div class="card-title">
-															<h3 class="card-label">Radial Bar Chart</h3>
-														</div>
-													</div>
-													<div class="card-body">
-														<!--begin::Chart-->
-														<div id="chart_13"></div>
-														<!--end::Chart-->
-													</div>
-												</div>
-												<!--end::Card-->
-											</div> --}}
-											<div class="col-lg-6">
-												<!--begin::Card-->
-												<div class="card card-custom gutter-b">
+												<div class="card card-custom gutter-b" >
 													<div class="card-header">
 														<div class="card-title">
 															<h3 class="card-label">Pie Chart Positive, Negative Profits </h3>
 														</div>
 													</div>
-													<div class="card-body" >
+													<div class="card-body">
 														<!--begin::Chart-->
 														{{-- <div id="chart_14"></div> --}}
-														 <canvas id="myChart"></canvas>
+														 <canvas id="myChart" ></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
 											</div>
+											{{-- Pie Chart % of Long AND Short Trades  --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Pie Chart % of Long AND Short Trades </h3>
+														</div>
+													</div>
+													<div class="card-body" >
+														<!--begin::Chart-->
+														{{-- <div id="chart_14"></div> --}}
+														 <canvas id="myChart1"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Pie Chart Long AND Short Trades Profitable --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Pie Chart Long AND Short Trades Profitable</h3>
+														</div>
+													</div>
+													<div class="card-body" >
+														<!--begin::Chart-->
+														 <canvas id="myChart2"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Bar Chart Average Winning and Losing Trade  --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart Average Winning and Losing Trade</h3>
+														</div>
+													</div>
+													<div class="card-body">
+														<!--begin::Chart-->
+														<canvas id="bar1"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Bar Chart  Long Trades and Short Trade  --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart  Long Trades and Short Trade  </h3>
+														</div>
+													</div>
+													<div class="card-body" >
+														<!--begin::Chart-->
+														{{-- <div id="chart_14"></div> --}}
+														 <canvas id="bar2"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Bar Chart Largest Winning AND Losing Trade  --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart Largest Winning AND Losing Trade</h3>
+														</div>
+													</div>
+													<div class="card-body">
+														<!--begin::Chart-->
+														<canvas id="bar3" class="d-flex justify-content-center"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Bar Chart Trade Distribution by Day of Week --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart Trade Distribution by Day of Week</h3>
+														</div>
+													</div>
+													<div class="card-body">
+														<!--begin::Chart-->
+														<canvas id="bar4"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Bar Chart Trade Distribution by Symbol --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart Trade Distribution by Symbol</h3>
+														</div>
+													</div>
+													<div class="card-body">
+														<!--begin::Chart-->
+														<canvas id="bar5"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Bar Chart Performance by Symbol --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart Performance by Symbol</h3>
+														</div>
+													</div>
+													<div class="card-body">
+														<!--begin::Chart-->
+														<canvas id="bar6"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>
+											{{-- Bar Chart Average Trade Duration --}}
+											<div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart Average Trade Duration</h3>
+														</div>
+													</div>
+													<div class="card-body">
+														<!--begin::Chart-->
+														<canvas id="bar7"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div>    
 										</div>		
 								
 									@endif	
@@ -630,8 +690,6 @@
 		<script src="{{asset('assets/admin/js/pages/widgets.js')}}"></script>
 		<!--begin::Page Vendors(used by this page)-->
 		<script src="{{asset('assets/admin/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-		<!--begin::Page Scripts(used by this page)-->
-		<script src="{{asset('assets/admin/js/pages/crud/ktdatatable/base/html-table.js')}}"></script>
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/admin/js/pages/crud/datatables/data-sources/html.js')}}"></script>
@@ -639,11 +697,7 @@
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/admin/js/pages/crud/datatables/basic/scrollable.js')}}"></script>
 		<!--begin::Page Scripts(used by this page)-->
-		<script src="{{asset('assets/admin/js/pages/crud/file-upload/dropzonejs.js')}}"></script>
-		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/admin/crud/forms/widgets/select2.js')}}"></script>
-		<!--begin::Page Scripts(used by this page)-->
-		<script src="{{asset('assets/admin/js/pages/features/charts/apexcharts.js')}}"></script>
 		<!--end::Page Scripts-->
 			<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/admin/js/pages/features/calendar/basic.js')}}"></script>
@@ -651,10 +705,35 @@
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		@yield('js')
 		<script>
+			// multi select
+			$('#kt_select2_3').select2({
+			placeholder: "Select a state",
+			});
+
 			var app = {{ Illuminate\Support\Js::from($profit ?? "") }};
-			var Neg = app.neg
-			var pos = app.pos
-			console.log(app.neg);
+			console.log(app);
+			var Neg = app.CountNeg
+			var Pos = app.CountPos
+			// function createChart(ctx, data, type) {
+			// 	return new Chart(ctx,  {
+			// 		type: type,
+			// 		data: data,
+			// 		options: {
+			// 			responsive: true,
+			// 			maintainAspectRatio: false,
+			// 			barValueSpacing: 20,
+			// 			scales: {
+			// 				yAxes: [{
+			// 					ticks: {
+			// 						min: 0,
+			// 					}
+			// 				}]
+			// 			}
+			// 		}
+			// 	})
+			// }
+
+           // var myBarChart = createChart(myChart, data,type)
 			const ctx = document.getElementById('myChart').getContext('2d');
             const myChart = new Chart(ctx, {
                 type: 'doughnut',
@@ -665,7 +744,7 @@
                     ],
                     datasets: [{
                         label: 'My First Dataset',
-                        data: [app.pos, app.neg],
+                        data: [app.CountPos,app.CountNeg],
                         backgroundColor: [
                         'rgb(255, 99, 132)',
                         'rgb(54, 162, 235)',
@@ -675,12 +754,243 @@
                     }]
                 }
             });
-            
-		
-			// multi select
-			$('#kt_select2_3').select2({
-			placeholder: "Select a state",
+			const LOP = document.getElementById('myChart1').getContext('2d');	
+		    const myChart1 = new Chart(LOP, {
+					type: 'doughnut',
+					data: {
+                     labels: [
+                      	'Positive',
+			        	'Negative'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [100,200],
+                        backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 5
+                    }]
+                }
 			});
+			const LST = document.getElementById('myChart2').getContext('2d');	
+		    const myChart2 = new Chart(LST, {
+					type: 'doughnut',
+					data: {
+                     labels: [
+                      	'Positive',
+			        	'Negative'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [50,20],
+                        backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 5
+                    }]
+                }
+			});
+
+		    const avgwl = document.getElementById('bar1').getContext('2d');	
+		    const bar1 = new Chart(avgwl, {
+					type: 'bar',
+					data: {
+						labels: ['Winning', 'Losing'],
+						datasets: [{
+							label: '# Average Winning and Losing Trade',
+							data: [50 , 100],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 2
+						}]
+					}
+			});
+			const AVGPN = document.getElementById('bar2').getContext('2d');	
+		    const bar2 = new Chart(AVGPN, {
+					type: 'bar',
+					data: {
+						labels: ['Winning', 'Losing'],
+						datasets: [{
+							label: '# Average Winning and Losing Trade',
+							data: [50 , 100],
+							backgroundColor: [
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+							],
+							borderWidth: 2
+						}]
+					}
+			});
+			const SS = document.getElementById('bar3').getContext('2d');	
+		    const bar3 = new Chart(SS, {
+					type: 'bar',
+					data: {
+						labels: ['Winning', 'Losing'],
+						datasets: [{
+							label: '# Average Winning and Losing Trade',
+							data: [50 , 100],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 2
+						}]
+					}
+			});
+			const CC = document.getElementById('bar4').getContext('2d');	
+		    const bar4 = new Chart(CC, {
+					type: 'bar',
+					data: {
+						labels: ['Winning', 'Losing'],
+						datasets: [{
+							label: '# Average Winning and Losing Trade',
+							data: [50 , 100],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 2
+						}]
+					}
+					
+			});
+			const WW = document.getElementById('bar5').getContext('2d');	
+		    const bar5 = new Chart(WW, {
+					type: 'bar',
+					data: {
+						labels: ['Winning', 'Losing'],
+						datasets: [{
+							label: '# Average Winning and Losing Trade',
+							data: [50 , 100],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 2
+						}]
+					}
+			});
+			const QQ = document.getElementById('bar6').getContext('2d');	
+		    const bar6 = new Chart(QQ, {
+					type: 'bar',
+					data: {
+						labels: ['Winning', 'Losing'],
+						datasets: [{
+							label: '# Average Winning and Losing Trade',
+							data: [50 , 100],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 2
+						}]
+					}
+			});
+			const BB = document.getElementById('bar7').getContext('2d');	
+		    const bar7 = new Chart(BB, {
+					type: 'bar',
+					data: {
+						labels: ['Winning', 'Losing'],
+						datasets: [{
+							label: '# Average Winning and Losing Trade',
+							data: [50 , 100],
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255, 99, 132, 1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 2
+						}]
+					}
+			});
+			
+
+			
 					
 		</script>
 	</body>

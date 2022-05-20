@@ -13,15 +13,15 @@ class Journal extends Model
 
      protected $fillable = [
         'entry_date',
-        'entry_time',
+       // 'entry_time',
         'exit_date',
         'position_nr',
         'symbol',
         'type',
         'size',
         'entry_price',
-        's/l',
-        't/p',
+        's_l',
+        't_p',
         'exit_price',
         'commission',
         'swap',
@@ -29,15 +29,18 @@ class Journal extends Model
        // 'desc',
         'user_id'
     ];
+    // protected static function boot()
+    // {
+        
+    // }
     protected static function boot()
-    {
+    {   
         parent::boot();
+
         self::creating(function($model){
-          $model->user_id = auth()->id;
+          $model->user_id = \Auth::user()->id;
         });
-    }
-    protected static function booted()
-    {
+
         static::addGlobalScope(new ClientScope);
     }  
 }

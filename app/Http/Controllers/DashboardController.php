@@ -16,18 +16,29 @@ class DashboardController extends Controller
     {   
         $profit = Journal::query()->toBase()
              ->selectRaw("SUM(profit) AS pnl")
-          //  ->selectRaw("Date(created_at) = CURDATE()")
-            ->selectRaw("count(*) AS trades")
-            ->selectRaw("count(case when type = 'sal' then 1 end) as sal")
-            ->selectRaw("count(case when type = 'buy' then 1 end) as buy")
-            ->selectRaw("MAX(profit) as max")
-            ->selectRaw("MIN(profit) as min")
-            ->selectRaw("AVG(profit) AS AvgPnl")
-            ->selectRaw("AVG(profit) / count(*)  AS AvgDaily") 
-            ->selectRaw("count(case when profit < 0 then 1 end) as neg")
-            ->selectRaw("count(case when profit > 0 then 1 end) as pos")
-            ->first();
-        //dd($profit);
+             ->selectRaw("SUM(CASE WHEN profit > 0 THEN profit ELSE 0 END) AS SumPos")
+             ->selectRaw("SUM(CASE WHEN profit < 0 THEN profit ELSE 0 END) AS SumNeg")
+             ->selectRaw("count(*) AS trades")
+             ->selectRaw("count(case when type = 'sal' then 1 end) as sal")
+             ->selectRaw("count(case when type = 'buy' then 1 end) as buy")
+             ->selectRaw("MAX(profit) as max")
+             ->selectRaw("MIN(profit) as min")
+             ->selectRaw("AVG(profit) AS AvgPnl")
+             ->selectRaw("AVG(profit) / count(*)  AS AvgD") 
+             ->selectRaw("count(case when profit < 0 then 1 end) as CountNeg")
+             ->selectRaw("count(case when profit > 0 then 1 end) as CountPos")
+             ->selectRaw("AVG(CASE WHEN profit > 0 THEN profit ELSE 0 END) as AVGPos")
+             ->selectRaw("AVG(CASE WHEN profit < 0 THEN profit ELSE 0 END) as AVGNeg")
+             ->first();
+
+        // $symbols = Journal::query()->get()->groupBy('symbol')->map(function ($d) {
+        //     return [
+        //         'key' => $d[0]->symbol,
+        //         'sum' => $d->sum('profit')
+        //     ];
+        // });
+       // dd($profit);    
+
         return view('layouts.admin')
         ->withProfit($profit);
      //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 

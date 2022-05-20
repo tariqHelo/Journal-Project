@@ -3,18 +3,17 @@
 @section('content')
         @include('shared.msg')
         <!--begin::Card-->
-            
         <div class="card card-custom">
             <div class="card-header">
                 <div class="card-title">
                     <span class="card-icon">
                         <i class="flaticon2-favourite text-primary"></i>
                     </span>
-                    <h3 class="card-label">HTML(DOM) Sourced Data</h3>
+                    <h3 class="card-label">journal Data</h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Dropdown-->
-               
+                   
                     <!--end::Dropdown-->
                     <!--begin::Button-->
                     <a href="{{route('journal.create')}}" class="btn btn-primary font-weight-bolder">
@@ -29,21 +28,22 @@
                         <tr> 
                             <th>Trade</th>
                             <th>Entry Date</th>
-                            <th>Entry Time</th>
                             <th>Exit Date</th>
-
                             <th>Position Nr</th>
                             <th>Symbol</th>
+
                             <th>Type</th>
                             <th>Size</th>
+
                             <th>entry_price</th>
                             <th>S/l</th>
+
                             <th>T/p</th>
                             <th>exit_price</th>
+
+                            <th>commission</th> 
+                            <th>swap</th>
                             <th>Profit</th>
-                            <th>Comments</th>
-
-
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -53,7 +53,6 @@
                                 <tr> 
                                     <td>{{++$key}}</td>
                                     <td>{{$journal->entry_date}}</td>
-                                    <td>{{$journal->entry_time}}</td>
                                     <td>{{$journal->exit_date}}</td>
                                     <td>{{$journal->position_nr}}</td>
                                     <td>{{$journal->symbol}}</td>
@@ -63,8 +62,14 @@
                                     <td>{{$journal->s_l}}</td>
                                     <td>{{$journal->t_p}}</td>
                                     <td>{{$journal->exit_price}}</td>
+                                    <td>{{$journal->commission}}</td>
+                                    <td>{{$journal->swap}}</td>
                                     <td>{{$journal->profit}}</td>
-                                    <td>{{$journal->desc}}</td>
+                                     {{-- <td nowrap="nowrap">
+                                        <a href="" class="btn btn-info btn-sm"><i class='fa fa-edit'></i></a>
+                                        <a href="" onclick='return confirm("Are you sure dude?")' class="btn btn-danger btn-sm"><i class='fa fa-trash'></i></a>
+
+                                    </td> --}}
                                     <td nowrap="nowrap"></td>
                                 </tr>
                             @endforeach                      
@@ -73,6 +78,7 @@
                 <!--end: Datatable-->
             </div>
         </div>
+						
 
         <!--end::Card-->
 					

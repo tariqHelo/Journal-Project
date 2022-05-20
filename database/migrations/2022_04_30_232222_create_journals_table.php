@@ -16,7 +16,7 @@ class CreateJournalsTable extends Migration
         Schema::create('journals', function (Blueprint $table) {
             $table->id();
             $table->date('entry_date');
-            $table->string('entry_time');
+         //   $table->string('entry_time');
             $table->date('exit_date');
             $table->string('position_nr');
             $table->string('symbol');

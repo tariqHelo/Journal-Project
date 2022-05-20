@@ -6,7 +6,7 @@
     <div class="card card-custom gutter-b">
         <div class="card-header">
             <div class="card-title">
-                <h3 class="card-label">Journal Data Enery Page</h3>
+                <h3 class="card-label">Edit Journal </h3>
             </div>
         </div>
         <!--begin::Form-->
@@ -16,10 +16,11 @@
                 <h3 class="card-title">Journal Form</h3>
             </div> --}}
             <!--begin::Form-->
-            <form method="POST" action="{{route('journal.store')}}">
+            <form method="PUT" action="{{route('journal.create' ,$journal->id )}}">
                @csrf
-                 @include('admin.journal._form', [
-                    'button' => 'Add'
+               @method('PUT')
+               @include('admin.journal._form', [
+                    'button' => 'Edit'
                 ])
             </form>
         </div>
