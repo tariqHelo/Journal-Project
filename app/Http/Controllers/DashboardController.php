@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Journal;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -13,7 +13,7 @@ class DashboardController extends Controller
      * @return \Illuminate\Support\Collection
      */
     public function index()
-    {   
+    {
         $profit = Journal::query()->toBase()
              ->selectRaw("SUM(profit) AS pnl")
              ->selectRaw("SUM(CASE WHEN profit > 0 THEN profit ELSE 0 END) AS SumPos")
@@ -31,6 +31,8 @@ class DashboardController extends Controller
             //  ->selectRaw("AVG(CASE WHEN profit < 0 THEN profit ELSE 0 END) as AVGNeg")
             //   ->selectRaw("CAST(count(case when profit > 0 then 1 end)/count(*)*100 AS INTEGER) as a")
              ->first();
+
+        $AvgD = Journal::query()->whereDate('created_at', today())->avg('profit');
 
         $symbols = Journal::query()->get()->groupBy('symbol')->map(function ($d) {
             return [
@@ -70,7 +72,7 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
 
         return view('admin.statistics.index');
     }
@@ -78,7 +80,7 @@ class DashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -89,7 +91,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -100,7 +102,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -111,8 +113,8 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -123,7 +125,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -132,14 +134,14 @@ class DashboardController extends Controller
     }
 }
 //    $events=[
-    //        ['title' => 'All Day Event','start' => '2022-05-12' , 'className' => "fc-event-danger fc-event-solid-warning"],
-    //        ['title' => 'ss','start' => '2022-05-12'],
-    //        ['title' => 'Count2','start' => '2022-05-08'],
-    //        ['title' => 'Count3','start' => '2022-05-07'],
-    //        ['title' => 'Count4','start' => '2022-05-03'],
-    //        ['title' => 'Count5','start' => '2022-05-02'],
-    //        ['title' => 'Count6','start' => '2022-05-01'],
-    //        ['title' => 'Count7','start' => '2022-05-10'],
-    //        ['title' => 'Count8','start' => '2022-05-09'],
-    //        ['title' => 'Count9','start' => '2022-05-08'],
-    //    ];
+//        ['title' => 'All Day Event','start' => '2022-05-12' , 'className' => "fc-event-danger fc-event-solid-warning"],
+//        ['title' => 'ss','start' => '2022-05-12'],
+//        ['title' => 'Count2','start' => '2022-05-08'],
+//        ['title' => 'Count3','start' => '2022-05-07'],
+//        ['title' => 'Count4','start' => '2022-05-03'],
+//        ['title' => 'Count5','start' => '2022-05-02'],
+//        ['title' => 'Count6','start' => '2022-05-01'],
+//        ['title' => 'Count7','start' => '2022-05-10'],
+//        ['title' => 'Count8','start' => '2022-05-09'],
+//        ['title' => 'Count9','start' => '2022-05-08'],
+//    ];
