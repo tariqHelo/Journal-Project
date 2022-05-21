@@ -282,7 +282,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Win Rate</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">20%</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{doubleval($profit->winRate).'%' ?? 0}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -339,7 +339,8 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average Daily PnL</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">0</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">
+															{{$AvgD}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
