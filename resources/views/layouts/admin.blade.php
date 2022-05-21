@@ -259,7 +259,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total Profit</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->pos ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->SumPos ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -271,7 +271,7 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total Loss</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->neg ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->SumNeg ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -282,7 +282,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Win Rate</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">20%</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.round($profit->CountPos/ $profit->CountNeg,2)*10}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -305,7 +305,7 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total R</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">0</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.$profit->AvgPnl ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -490,7 +490,6 @@
 													</div>
 													<div class="card-body">
 														<!--begin::Chart-->
-														{{-- <div id="chart_14"></div> --}}
 														 <canvas id="myChart" ></canvas>
 														<!--end::Chart-->
 													</div>
@@ -508,7 +507,6 @@
 													</div>
 													<div class="card-body" >
 														<!--begin::Chart-->
-														{{-- <div id="chart_14"></div> --}}
 														 <canvas id="myChart1"></canvas>
 														<!--end::Chart-->
 													</div>
@@ -516,7 +514,7 @@
 												<!--end::Card-->
 											</div>
 											{{-- Pie Chart Long AND Short Trades Profitable --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -531,9 +529,9 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
+											</div> --}}
 											{{-- Bar Chart Average Winning and Losing Trade  --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -548,9 +546,9 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
+											</div> --}}
 											{{-- Bar Chart  Long Trades and Short Trade  --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -560,15 +558,14 @@
 													</div>
 													<div class="card-body" >
 														<!--begin::Chart-->
-														{{-- <div id="chart_14"></div> --}}
 														 <canvas id="bar2"></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
+											</div> --}}
 											{{-- Bar Chart Largest Winning AND Losing Trade  --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -583,9 +580,9 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
+											</div> --}}
 											{{-- Bar Chart Trade Distribution by Day of Week --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -600,9 +597,26 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
+											</div> --}}
+											{{-- Bar Chart Performance by Day of Week --}}
+											{{-- <div class="col-lg-6">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b">
+													<div class="card-header">
+														<div class="card-title">
+															<h3 class="card-label">Bar Chart Performance by Day of Week</h3>
+														</div>
+													</div>
+													<div class="card-body">
+														<!--begin::Chart-->
+														<canvas id="bar8"></canvas>
+														<!--end::Chart-->
+													</div>
+												</div>
+												<!--end::Card-->
+											</div> --}}
 											{{-- Bar Chart Trade Distribution by Symbol --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -617,9 +631,9 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
+											</div> --}}
 											{{-- Bar Chart Performance by Symbol --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -634,9 +648,9 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>
+											</div> --}}
 											{{-- Bar Chart Average Trade Duration --}}
-											<div class="col-lg-6">
+											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -651,7 +665,7 @@
 													</div>
 												</div>
 												<!--end::Card-->
-											</div>    
+											</div>     --}}
 										</div>		
 								
 									@endif	
@@ -699,8 +713,6 @@
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/admin/crud/forms/widgets/select2.js')}}"></script>
 		<!--end::Page Scripts-->
-			<!--begin::Page Scripts(used by this page)-->
-		<script src="{{asset('assets/admin/js/pages/features/calendar/basic.js')}}"></script>
 		<!--end::Page Scripts-->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		@yield('js')
@@ -709,285 +721,296 @@
 			$('#kt_select2_3').select2({
 			placeholder: "Select a state",
 			});
-
 			var app = {{ Illuminate\Support\Js::from($profit ?? "") }};
 			console.log(app);
 			var Neg = app.CountNeg
 			var Pos = app.CountPos
-			// function createChart(ctx, data, type) {
-			// 	return new Chart(ctx,  {
-			// 		type: type,
-			// 		data: data,
-			// 		options: {
-			// 			responsive: true,
-			// 			maintainAspectRatio: false,
-			// 			barValueSpacing: 20,
-			// 			scales: {
-			// 				yAxes: [{
-			// 					ticks: {
-			// 						min: 0,
-			// 					}
-			// 				}]
-			// 			}
-			// 		}
-			// 	})
-			// }
-
-           // var myBarChart = createChart(myChart, data,type)
 			const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                     labels: [
-                      	'Positive',
-			        	'Negative'
-                    ],
-                    datasets: [{
-                        label: 'My First Dataset',
-                        data: [app.CountPos,app.CountNeg],
-                        backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 5
-                    }]
-                }
-            });
-			const LOP = document.getElementById('myChart1').getContext('2d');	
-		    const myChart1 = new Chart(LOP, {
-					type: 'doughnut',
-					data: {
-                     labels: [
-                      	'Positive',
-			        	'Negative'
-                    ],
-                    datasets: [{
-                        label: 'My First Dataset',
-                        data: [100,200],
-                        backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 5
-                    }]
-                }
-			});
-			const LST = document.getElementById('myChart2').getContext('2d');	
-		    const myChart2 = new Chart(LST, {
-					type: 'doughnut',
-					data: {
-                     labels: [
-                      	'Positive',
-			        	'Negative'
-                    ],
-                    datasets: [{
-                        label: 'My First Dataset',
-                        data: [50,20],
-                        backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 5
-                    }]
-                }
-			});
+			const ctx1 = document.getElementById('myChart1').getContext('2d');
+			let type = ['bar','pie'];
+			labels = ['January','February','March','April','May','June'];
+			const data = {
+					labels: labels,
+					datasets: [{
+					label: 'My First dataset',
+					backgroundColor: 'rgb(255, 99, 132)',
+					borderColor: 'rgb(255, 99, 132)',
+					data: [0, 10, 5, 2, 20, 30, 45],
+					}]
+				};
+			var myChart = createChart(ctx,type[0], data)
+			var myChart1 = createChart(ctx1,type[0], data)
+			function createChart(ctx,bar, data) {
+              return new Chart(ctx, {
+                type: bar,
+				data: data,
+				options: {}
+             });
+			}
+           
+		// 	const LOP = document.getElementById('myChart1').getContext('2d');	
+		//     const myChart1 = new Chart(LOP, {
+		// 			type: 'doughnut',
+		// 			data: {
+        //              labels: [
+        //               	'Positive',
+		// 	        	'Negative'
+        //             ],
+        //             datasets: [{
+        //                 label: 'My First Dataset',
+        //                 data: [100,200],
+        //                 backgroundColor: [
+        //                 'rgb(255, 99, 132)',
+        //                 'rgb(54, 162, 235)',
+        //                 'rgb(255, 205, 86)'
+        //                 ],
+        //                 hoverOffset: 5
+        //             }]
+        //         }
+		// 	});
+		// 	const LST = document.getElementById('myChart2').getContext('2d');	
+		//     const myChart2 = new Chart(LST, {
+		// 			type: 'doughnut',
+		// 			data: {
+        //              labels: [
+        //               	'Positive',
+		// 	        	'Negative'
+        //             ],
+        //             datasets: [{
+        //                 label: 'My First Dataset',
+        //                 data: [50,20],
+        //                 backgroundColor: [
+        //                 'rgb(255, 99, 132)',
+        //                 'rgb(54, 162, 235)',
+        //                 'rgb(255, 205, 86)'
+        //                 ],
+        //                 hoverOffset: 5
+        //             }]
+        //         }
+		// 	});
 
-		    const avgwl = document.getElementById('bar1').getContext('2d');	
-		    const bar1 = new Chart(avgwl, {
-					type: 'bar',
-					data: {
-						labels: ['Winning', 'Losing'],
-						datasets: [{
-							label: '# Average Winning and Losing Trade',
-							data: [50 , 100],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 2
-						}]
-					}
-			});
-			const AVGPN = document.getElementById('bar2').getContext('2d');	
-		    const bar2 = new Chart(AVGPN, {
-					type: 'bar',
-					data: {
-						labels: ['Winning', 'Losing'],
-						datasets: [{
-							label: '# Average Winning and Losing Trade',
-							data: [50 , 100],
-							backgroundColor: [
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-							],
-							borderWidth: 2
-						}]
-					}
-			});
-			const SS = document.getElementById('bar3').getContext('2d');	
-		    const bar3 = new Chart(SS, {
-					type: 'bar',
-					data: {
-						labels: ['Winning', 'Losing'],
-						datasets: [{
-							label: '# Average Winning and Losing Trade',
-							data: [50 , 100],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 2
-						}]
-					}
-			});
-			const CC = document.getElementById('bar4').getContext('2d');	
-		    const bar4 = new Chart(CC, {
-					type: 'bar',
-					data: {
-						labels: ['Winning', 'Losing'],
-						datasets: [{
-							label: '# Average Winning and Losing Trade',
-							data: [50 , 100],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 2
-						}]
-					}
+		//     const avgwl = document.getElementById('bar1').getContext('2d');	
+		//     const bar1 = new Chart(avgwl, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Winning', 'Losing'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [50 , 100],
+		// 					backgroundColor: [
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 						'rgba(255, 206, 86, 1)',
+		// 						'rgba(75, 192, 192, 1)',
+		// 						'rgba(153, 102, 255, 1)',
+		// 						'rgba(255, 159, 64, 1)'
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
+		// 	});
+		// 	const AVGPN = document.getElementById('bar2').getContext('2d');	
+		//     const bar2 = new Chart(AVGPN, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Winning', 'Losing'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [50 , 100],
+		// 					backgroundColor: [
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
+		// 	});
+		// 	const SS = document.getElementById('bar3').getContext('2d');	
+		//     const bar3 = new Chart(SS, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Winning', 'Losing'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [50 , 100],
+		// 					backgroundColor: [
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 						'rgba(255, 206, 86, 1)',
+		// 						'rgba(75, 192, 192, 1)',
+		// 						'rgba(153, 102, 255, 1)',
+		// 						'rgba(255, 159, 64, 1)'
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
+		// 	});
+		// 	const CC = document.getElementById('bar4').getContext('2d');	
+		//     const bar4 = new Chart(CC, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [12, 19, 3, 5, 2, 3],
+		// 					backgroundColor: [
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 						'rgba(255, 206, 86, 1)',
+		// 						'rgba(75, 192, 192, 1)',
+		// 						'rgba(153, 102, 255, 1)',
+		// 						'rgba(255, 159, 64, 1)'
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
 					
-			});
-			const WW = document.getElementById('bar5').getContext('2d');	
-		    const bar5 = new Chart(WW, {
-					type: 'bar',
-					data: {
-						labels: ['Winning', 'Losing'],
-						datasets: [{
-							label: '# Average Winning and Losing Trade',
-							data: [50 , 100],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 2
-						}]
-					}
-			});
-			const QQ = document.getElementById('bar6').getContext('2d');	
-		    const bar6 = new Chart(QQ, {
-					type: 'bar',
-					data: {
-						labels: ['Winning', 'Losing'],
-						datasets: [{
-							label: '# Average Winning and Losing Trade',
-							data: [50 , 100],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 2
-						}]
-					}
-			});
-			const BB = document.getElementById('bar7').getContext('2d');	
-		    const bar7 = new Chart(BB, {
-					type: 'bar',
-					data: {
-						labels: ['Winning', 'Losing'],
-						datasets: [{
-							label: '# Average Winning and Losing Trade',
-							data: [50 , 100],
-							backgroundColor: [
-								'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)',
-								'rgba(255, 206, 86, 0.2)',
-								'rgba(75, 192, 192, 0.2)',
-								'rgba(153, 102, 255, 0.2)',
-								'rgba(255, 159, 64, 0.2)'
-							],
-							borderColor: [
-								'rgba(255, 99, 132, 1)',
-								'rgba(54, 162, 235, 1)',
-								'rgba(255, 206, 86, 1)',
-								'rgba(75, 192, 192, 1)',
-								'rgba(153, 102, 255, 1)',
-								'rgba(255, 159, 64, 1)'
-							],
-							borderWidth: 2
-						}]
-					}
-			});
+		// 	});
+		// 	const WW = document.getElementById('bar5').getContext('2d');	
+		//     const bar5 = new Chart(WW, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Winning', 'Losing'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [50 , 100],
+		// 					backgroundColor: [
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 						'rgba(255, 206, 86, 1)',
+		// 						'rgba(75, 192, 192, 1)',
+		// 						'rgba(153, 102, 255, 1)',
+		// 						'rgba(255, 159, 64, 1)'
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
+		// 	});
+		// 	const QQ = document.getElementById('bar6').getContext('2d');	
+		//     const bar6 = new Chart(QQ, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Winning', 'Losing'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [50 , 100],
+		// 					backgroundColor: [
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 						'rgba(255, 206, 86, 1)',
+		// 						'rgba(75, 192, 192, 1)',
+		// 						'rgba(153, 102, 255, 1)',
+		// 						'rgba(255, 159, 64, 1)'
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
+		// 	});
+		// 	const BB = document.getElementById('bar7').getContext('2d');	
+		//     const bar7 = new Chart(BB, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Winning', 'Losing'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [50 , 100],
+		// 					backgroundColor: [
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 						'rgba(255, 206, 86, 1)',
+		// 						'rgba(75, 192, 192, 1)',
+		// 						'rgba(153, 102, 255, 1)',
+		// 						'rgba(255, 159, 64, 1)'
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
+		// 	});
+		// 	const mm = document.getElementById('bar8').getContext('2d');	
+		//     const bar8 = new Chart(mm, {
+		// 			type: 'bar',
+		// 			data: {
+		// 				labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		// 				datasets: [{
+		// 					label: '# Average Winning and Losing Trade',
+		// 					data: [12, 19, 3, 5, 2, 3],
+		// 					backgroundColor: [
+		// 						'rgba(255, 99, 132, 0.2)',
+		// 						'rgba(54, 162, 235, 0.2)',
+		// 						'rgba(255, 206, 86, 0.2)',
+		// 						'rgba(75, 192, 192, 0.2)',
+		// 						'rgba(153, 102, 255, 0.2)',
+		// 						'rgba(255, 159, 64, 0.2)'
+		// 					],
+		// 					borderColor: [
+		// 						'rgba(255, 99, 132, 1)',
+		// 						'rgba(54, 162, 235, 1)',
+		// 						'rgba(255, 206, 86, 1)',
+		// 						'rgba(75, 192, 192, 1)',
+		// 						'rgba(153, 102, 255, 1)',
+		// 						'rgba(255, 159, 64, 1)'
+		// 					],
+		// 					borderWidth: 2
+		// 				}]
+		// 			}
+		// 	});
+			
 			
 
 			

@@ -40,11 +40,12 @@
 
                             <th>T/p</th>
                             <th>exit_price</th>
-
+                            <th>EDIT</th> 
+                            <th>DELETE</th>
                             <th>commission</th> 
                             <th>swap</th>
                             <th>Profit</th>
-                            <th>Actions</th>
+                            <th>cccc</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,9 @@
                                     <td>{{$journal->s_l}}</td>
                                     <td>{{$journal->t_p}}</td>
                                     <td>{{$journal->exit_price}}</td>
+                                    <td> <a href="{{route('journal.edit',$journal->id)}}" class="btn btn-info btn-sm"><i class='fa fa-edit'></i></a></td>
+                                    <td> <a href="{{route('J-delete',$journal->id)}}" onclick='return confirm("Are you sure dude?")' class="btn btn-danger btn-sm"><i class='fa fa-trash'></i></a></a></td>
+
                                     <td>{{$journal->commission}}</td>
                                     <td>{{$journal->swap}}</td>
                                     <td>{{$journal->profit}}</td>
@@ -70,7 +74,7 @@
                                         <a href="" onclick='return confirm("Are you sure dude?")' class="btn btn-danger btn-sm"><i class='fa fa-trash'></i></a>
 
                                     </td> --}}
-                                    <td nowrap="nowrap"></td>
+                                    <td >ccccc</td>
                                 </tr>
                             @endforeach                      
                     </tbody>

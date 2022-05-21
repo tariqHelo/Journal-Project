@@ -44,11 +44,12 @@ Route::group(['middleware' => 'auth'] , function () {
     Route::resource('users', UsersController::class);
     // journal
     Route::resource('journal', JournalController::class);
+    Route::get('journal/{journal}/delete', [JournalController::class , 'destroy'])->name('J-delete');
      // calender
     Route::resource('calender', CalenderController::class);
      // Calculations
     Route::resource('calc', CalculationsController::class);
-     // Calculations
+     // statistics
     Route::resource('statistics', StatisticsController::class);
 }); 
 require __DIR__.'/auth.php';

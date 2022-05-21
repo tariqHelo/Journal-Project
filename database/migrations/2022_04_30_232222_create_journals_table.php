@@ -15,10 +15,9 @@ class CreateJournalsTable extends Migration
     {
         Schema::create('journals', function (Blueprint $table) {
             $table->id();
-            $table->date('entry_date');
-         //   $table->string('entry_time');
-            $table->date('exit_date');
-            $table->string('position_nr');
+            $table->timestamp('entry_date');
+            $table->timestamp('exit_date');
+            $table->integer('position_nr');
             $table->string('symbol');
             $table->enum('type',['sal' , 'buy']);
             $table->float('size');

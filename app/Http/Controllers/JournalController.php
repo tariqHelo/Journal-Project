@@ -44,7 +44,7 @@ class JournalController extends Controller
     {
        // dd($request->all());
         $journal = Journal::create($request->all());
-        \Session::flash("msg", "s:You are adedd Sucssfuly");
+        \Session::flash("msg", "s:You\'ve Successfully Added");
         return redirect()->route('journal.index');
     }
 
@@ -80,7 +80,9 @@ class JournalController extends Controller
      */
     public function update(UpdateJournalRequest $request, Journal $journal)
     {
-        //
+        $journal->update($request->all());
+        \Session::flash("msg", "s:You've Updated Successfully");
+        return redirect()->route('journal.index');
     }
 
     /**
@@ -91,6 +93,8 @@ class JournalController extends Controller
      */
     public function destroy(Journal $journal)
     {
-        //
+        $journal->delete();
+         \Session::flash("msg","e:journal has been Deleted successfully");
+        return back();
     }
 }

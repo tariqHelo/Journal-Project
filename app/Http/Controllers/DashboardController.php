@@ -27,17 +27,28 @@ class DashboardController extends Controller
              ->selectRaw("AVG(profit) / count(*)  AS AvgD") 
              ->selectRaw("count(case when profit < 0 then 1 end) as CountNeg")
              ->selectRaw("count(case when profit > 0 then 1 end) as CountPos")
-             ->selectRaw("AVG(CASE WHEN profit > 0 THEN profit ELSE 0 END) as AVGPos")
-             ->selectRaw("AVG(CASE WHEN profit < 0 THEN profit ELSE 0 END) as AVGNeg")
+            //  ->selectRaw("AVG(CASE WHEN profit > 0 THEN profit ELSE 0 END) as AVGPos")
+            //  ->selectRaw("AVG(CASE WHEN profit < 0 THEN profit ELSE 0 END) as AVGNeg")
+            //   ->selectRaw("CAST(count(case when profit > 0 then 1 end)/count(*)*100 AS INTEGER) as a")
              ->first();
 
-        // $symbols = Journal::query()->get()->groupBy('symbol')->map(function ($d) {
-        //     return [
-        //         'key' => $d[0]->symbol,
-        //         'sum' => $d->sum('profit')
-        //     ];
-        // });
-       // dd($profit);    
+        $symbols = Journal::query()->get()->groupBy('symbol')->map(function ($d) {
+            return [
+                'key' => $d[0]->symbol,
+                'sum' => $d->sum('profit')
+            ];
+        });
+
+        $type = Journal::query()->where('type', 'buy')
+            ->selectRaw("SUM(CASE WHEN profit > 0 THEN profit ELSE 0 END) AS positive")
+            ->selectRaw("SUM(CASE WHEN profit < 0 THEN profit ELSE 0 END) AS negative")
+            ->get();
+
+        $Distribution = Journal::orderBy('created_at')->get()->groupBy(function($item) {
+            return $item->created_at->format('l');
+        });
+
+       // dd($buy->toArray());    
 
         return view('layouts.admin')
         ->withProfit($profit);
