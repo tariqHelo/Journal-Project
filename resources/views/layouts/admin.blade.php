@@ -282,11 +282,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Win Rate</h5>
-<<<<<<< HEAD
 														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.round($profit->CountPos/ $profit->CountNeg,2)*10}}</p>
-=======
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{doubleval($profit->winRate).'%' ?? 0}}</p>
->>>>>>> bb2aeadfbf688d04b304f716786c75d38038b45f
 													</div>
 													<!--end::Body-->
 												</div>
@@ -344,7 +340,7 @@
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average Daily PnL</h5>
 														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">
-															{{$AvgD}}</p>
+															{{$AvgD ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>

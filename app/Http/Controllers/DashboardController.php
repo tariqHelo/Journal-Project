@@ -13,45 +13,47 @@ class DashboardController extends Controller
      * @return \Illuminate\Support\Collection
      */
     public function index()
-    {
-        $profit = Journal::query()->toBase()
+    {   
+        $q = Journal::query();
+        $profit = $q->toBase()
              ->selectRaw("SUM(profit) AS pnl")
              ->selectRaw("SUM(CASE WHEN profit > 0 THEN profit ELSE 0 END) AS SumPos")
              ->selectRaw("SUM(CASE WHEN profit < 0 THEN profit ELSE 0 END) AS SumNeg")
              ->selectRaw("count(*) AS trades")
              ->selectRaw("count(case when type = 'sal' then 1 end) as sal")
              ->selectRaw("count(case when type = 'buy' then 1 end) as buy")
+             ->selectRaw("count(CASE WHEN (type = 'buy' AND profit > 0) THEN  1 END) as ss1")
+             ->selectRaw("count(CASE WHEN (type = 'buy' AND profit < 0) THEN  1 END) as ss2")
+             ->selectRaw("count(CASE WHEN (type = 'sal' AND profit > 0) THEN  1 END) as ss3")
+             ->selectRaw("count(CASE WHEN (type = 'sal' AND profit < 0) THEN  1 END) as ss5")
              ->selectRaw("MAX(profit) as max")
              ->selectRaw("MIN(profit) as min")
              ->selectRaw("AVG(profit) AS AvgPnl")
-             ->selectRaw("AVG(profit) / count(*)  AS AvgD") 
+             ->selectRaw("AVG(profit) = '2022-05-22'  AS AvgD") 
              ->selectRaw("count(case when profit < 0 then 1 end) as CountNeg")
              ->selectRaw("count(case when profit > 0 then 1 end) as CountPos")
-            //  ->selectRaw("AVG(CASE WHEN profit > 0 THEN profit ELSE 0 END) as AVGPos")
-            //  ->selectRaw("AVG(CASE WHEN profit < 0 THEN profit ELSE 0 END) as AVGNeg")
-            //   ->selectRaw("CAST(count(case when profit > 0 then 1 end)/count(*)*100 AS INTEGER) as a")
-             ->first();
-
-        $AvgD = Journal::query()->whereDate('created_at', today())->avg('profit');
-
-        $symbols = Journal::query()->get()->groupBy('symbol')->map(function ($d) {
+             ->selectRaw("AVG(CASE WHEN profit > 0 THEN profit ELSE 0 END) as AVGPos")
+             ->selectRaw("AVG(CASE WHEN profit < 0 THEN profit ELSE 0 END) as AVGNeg")
+            //  ->selectRaw("CAST(count(case when profit > 0 then 1 end)/count(*)*100 AS INTEGER) as a")
+             ->first(); 
+            // CURDATE()
+       // dd($profit);
+         //$AvgD = Journal::active()->avg('profit');
+         $Distribution = Journal::orderBy('entry_date')->get()->groupBy(function($item) {
+            return [
+                  'count_of_day' => $item->created_at->format('l'),
+                //   'sum_of_day' => $item->created_at,
+                
+            ];
+         });
+         dd($Distribution);
+        $symbols = $q->get()->groupBy('symbol')->map(function ($d) {
             return [
                 'key' => $d[0]->symbol,
                 'sum' => $d->sum('profit')
             ];
         });
-
-        $type = Journal::query()->where('type', 'buy')
-            ->selectRaw("SUM(CASE WHEN profit > 0 THEN profit ELSE 0 END) AS positive")
-            ->selectRaw("SUM(CASE WHEN profit < 0 THEN profit ELSE 0 END) AS negative")
-            ->get();
-
-        $Distribution = Journal::orderBy('created_at')->get()->groupBy(function($item) {
-            return $item->created_at->format('l');
-        });
-
-       // dd($buy->toArray());    
-
+       
         return view('layouts.admin')
         ->withProfit($profit);
      //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 

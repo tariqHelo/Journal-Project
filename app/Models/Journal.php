@@ -29,10 +29,10 @@ class Journal extends Model
        // 'desc',
         'user_id'
     ];
-    // protected static function boot()
-    // {
-        
-    // }
+    public function scopeActive($query)
+    {
+        $query->whereDate('created_at', today());
+    }
     protected static function boot()
     {   
         parent::boot();
