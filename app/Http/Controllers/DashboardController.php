@@ -88,7 +88,7 @@ class DashboardController extends Controller
                 'Profit'              => round($result->profit,2), // Entered by User
              ];
          });
-     //dd($result);
+     dd($result);
         return view('layouts.admin')
         ->withProfit($profit)
         ->withDay($day)
