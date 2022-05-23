@@ -31,7 +31,7 @@ class JournalFactory extends Factory
             'commission' => $this->faker->unique()->randomFloat(1, 0, 100),
             'swap'       => $this->faker->unique()->randomFloat(1, 0, 100),  
             'profit'     => $this->faker->unique()->numberBetween(100, 500),
-            'user_id'    => $this->faker->unique()->numberBetween(1, 10),
+            'user_id'    => $this->faker->numberBetween(1,2,3),
         ];
     } 
 }

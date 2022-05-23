@@ -25,17 +25,15 @@ class StatisticsController extends Controller
 
          $result = collect($data)->values()->map(function ($result, $key)  {
             return  [
-                
+                // $result->size == 0 ? 0 :($result->profit / $result->size)
                 'key'             => ++$key,
                 'entry_date'      => $result->entry_date,
-                'pnL_per_lot'     => $pnl   = ($result->profit / $result->size) , //Profit / Size
+                'pnL_per_lot'     => ($result->profit / $result->size) == 0 ? 0 : $pnl = ($result->profit / $result->size)   , //Profit / Size
                 'ticks'           => $ticks = ($result->entry_price % $result->exit_price),//Difference between Entry Price and Exit Price 
-                'Value'           => $value = 20, //PnL per Lot / Ticks
+                'Value'           => ($pnl/$ticks)== 0 ? 0: $value = ($pnl/$ticks), //PnL per Lot / Ticks
                 'TP_Ticks'        => $TP =  $result->entry_price % $result->t_p, // Difference Entry price and T/P
                 'SL_Ticks'        => $result->entry_price % $result->s_l, //Difference between Entry price and S/L
-                   
                   ///////////
-
                 'Risk/Reward'         => round($result->size * $value * $TP / $result->size * $value,2), // Planned Profit / $ Risk
                 'R'                   => round($result->profit / $result->size * $value,2),// $-Profit / $-Risk
                 'Risk'                => round($result->size * $value,2), //Size * Value * Risk Ricks

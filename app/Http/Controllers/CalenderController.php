@@ -39,7 +39,7 @@ class CalenderController extends Controller
         });
         $rate = collect($data)->values()->map(function ($rate)  {
             return  [
-                    'title'     =>  'Win Rate'.':'. ' '.$rate->count() / $rate->sum('profit').'%',
+                    'title'     =>  'Win Rate'.':'. ' '.($rate->count() / $rate->sum('profit')).'%',
                 //    'title'     =>   'Win Rate'.':'. ' '.$rate->avg('profit') .'%',
                    'start'     => ($rate[0]->entry_date),
                    'className' => "fc-event-solid-info fc-event-success",
@@ -50,7 +50,7 @@ class CalenderController extends Controller
         });
 
        $allItems = $events->merge($pnl)->merge($rate);
-       // dd($allItems);
+       // return($allItems);
        return response()->json(['events' => $allItems]);
        //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 
              // Count of 5 Trades have positive Profit,

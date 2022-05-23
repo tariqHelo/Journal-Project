@@ -60,7 +60,6 @@
     </div>
    @section('js')
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script>
             
             var KTCalendarBasic = function() {

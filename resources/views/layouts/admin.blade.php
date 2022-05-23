@@ -248,7 +248,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total PnL</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">${{$profit->pnl ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">${{number_format($profit->pnl) ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -282,7 +282,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Win Rate</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.round($profit->CountPos/ $profit->CountNeg,2)*10}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.round($profit->CountPos/ ($profit->CountNeg + $profit->CountPos)*100 ?? "0")}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -305,7 +305,7 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total R</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.$profit->AvgPnl ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.round($profit->AvgPnl) ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -491,7 +491,7 @@
 													</div>
 													<div class="card-body">
 														<!--begin::Chart-->
-														 <canvas id="myChart" ></canvas>
+														 <canvas id="myChart1" ></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
@@ -508,14 +508,14 @@
 													</div>
 													<div class="card-body" >
 														<!--begin::Chart-->
-														 <canvas id="myChart1"></canvas>
+														 <canvas id="myChart2"></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
 											</div>
 											{{-- Pie Chart Long AND Short Trades Profitable --}}
-											{{-- <div class="col-lg-6">
+											<div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -525,14 +525,14 @@
 													</div>
 													<div class="card-body" >
 														<!--begin::Chart-->
-														 <canvas id="myChart2"></canvas>
+														 <canvas id="myChart3"></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
-											</div> --}}
+											</div>
 											{{-- Bar Chart Average Winning and Losing Trade  --}}
-											{{-- <div class="col-lg-6">
+											<div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -542,14 +542,14 @@
 													</div>
 													<div class="card-body">
 														<!--begin::Chart-->
-														<canvas id="bar1"></canvas>
+														<canvas id="myChart4"></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
-											</div> --}}
+											</div>
 											{{-- Bar Chart  Long Trades and Short Trade  --}}
-											{{-- <div class="col-lg-6">
+											<div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -559,14 +559,14 @@
 													</div>
 													<div class="card-body" >
 														<!--begin::Chart-->
-														 <canvas id="bar2"></canvas>
+														 <canvas id="myChart5"></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
-											</div> --}}
+											</div>
 											{{-- Bar Chart Largest Winning AND Losing Trade  --}}
-											{{-- <div class="col-lg-6">
+											<div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -576,12 +576,12 @@
 													</div>
 													<div class="card-body">
 														<!--begin::Chart-->
-														<canvas id="bar3" class="d-flex justify-content-center"></canvas>
+														<canvas id="myChart6" class="d-flex justify-content-center"></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
-											</div> --}}
+											</div>
 											{{-- Bar Chart Trade Distribution by Day of Week --}}
 											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
@@ -723,29 +723,83 @@
 			placeholder: "Select a state",
 			});
 			var app = {{ Illuminate\Support\Js::from($profit ?? "") }};
-			console.log(app);
-			var Neg = app.CountNeg
-			var Pos = app.CountPos
-			const ctx = document.getElementById('myChart').getContext('2d');
-			const ctx1 = document.getElementById('myChart1').getContext('2d');
-			let type = ['bar','pie'];
-			labels = ['January','February','March','April','May','June'];
-			const data = {
+			var days = {{ Illuminate\Support\Js::from($day ?? "") }};
+			console.log(days.datasets);
+			var Neg = app.CountNeg, Pos = app.CountPos , Sell = app.sal , Buy = app.buy
+			 POSBUY = app.POSBUY ,NEGBUY = app.NEGBUY ,POSSEL = app.POSSEL ,NEGSEL = app.NEGSEL ,
+			  AVGPos = app.AVGPos , AVGNeg = app.AVGNeg , max = app.max , min = app.min
+
+		     const ctx = document.getElementById('myChart1').getContext('2d');
+			 const ctx1 = document.getElementById('myChart2').getContext('2d');
+			 const ctx2 = document.getElementById('myChart3').getContext('2d');
+			const ctx3 = document.getElementById('myChart4').getContext('2d');
+			const ctx4 = document.getElementById('myChart5').getContext('2d');
+			const ctx5 = document.getElementById('myChart6').getContext('2d');
+			let type = ['bar','pie','doughnut'];
+			// let labels = ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'];
+			let labels = ['Positive','Negative'];
+			let labels1 = ['+Buy','-Buy','+Sell','-Sell'];
+			let labels2 = ['Buy','Sell'];
+			let labels3 = ['MAX','MIN'];
+			backgroundColor1 = ['rgb(54, 162, 235)','rgb(255, 99, 132)']
+			backgroundColor2= ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)','rgb(238,130,238)']
+			// const data = {
+			// 		labels: labels,
+			// 		datasets:[days.datasets]
+			// 	};
+			const data1 = {
 					labels: labels,
-					datasets: [{
-					label: 'My First dataset',
-					backgroundColor: 'rgb(255, 99, 132)',
-					borderColor: 'rgb(255, 99, 132)',
-					data: [0, 10, 5, 2, 20, 30, 45],
+					  datasets: [{
+                        // label: 'My First Dataset',
+                        data: [Pos,Neg],
+                        backgroundColor: backgroundColor1
 					}]
 				};
-			var myChart = createChart(ctx,type[0], data)
-			var myChart1 = createChart(ctx1,type[0], data)
+			const data2 = {
+					labels: labels1,
+					  datasets: [{
+                        data: [Buy,Sell],
+                        backgroundColor: backgroundColor1
+					}]
+				};
+			const data3 = {
+					labels: labels1,
+					  datasets: [{
+                        data: [POSBUY,NEGBUY,POSSEL,NEGSEL],
+                        backgroundColor: backgroundColor2
+					}]
+				};
+			const data4 = {
+					labels: labels,
+					  datasets: [{
+                        data: [AVGPos,AVGNeg],
+                        backgroundColor: backgroundColor1
+					}]
+				};
+			const data5 = {
+					labels: labels2,
+					  datasets: [{
+                        data: [POSBUY+NEGBUY,POSSEL+NEGSEL],
+                        backgroundColor: backgroundColor1
+					}]
+				};
+			const data6 = {
+					labels: labels3,
+					  datasets: [{
+                        data: [max,min],
+                        backgroundColor: backgroundColor2
+					}]
+				};
+			var myChart1 = createChart(ctx,type[1], data1)
+			var myChart2 = createChart(ctx1,type[2], data2)
+			var myChart3 = createChart(ctx2,type[1], data3)
+			var myChart4 = createChart(ctx3,type[0], data4)
+			var myChart5 = createChart(ctx4,type[0], data5)
+			var myChart6 = createChart(ctx5,type[0], data6)
 			function createChart(ctx,bar, data) {
               return new Chart(ctx, {
                 type: bar,
 				data: data,
-				options: {}
              });
 			}
            
