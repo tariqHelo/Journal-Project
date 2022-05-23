@@ -28,9 +28,9 @@ class StatisticsController extends Controller
                 // $result->size == 0 ? 0 :($result->profit / $result->size)
                 'key'             => ++$key,
                 'entry_date'      => $result->entry_date,
-                'pnL_per_lot'     => ($result->profit / $result->size) == 0 ? 0 : $pnl = ($result->profit / $result->size)   , //Profit / Size
+                'pnL_per_lot'     => $result->size == 0 ? 0 : $pnl = ($result->profit / $result->size), //Profit / Size
                 'ticks'           => $ticks = ($result->entry_price % $result->exit_price),//Difference between Entry Price and Exit Price 
-                'Value'           => ($pnl/$ticks)== 0 ? 0: $value = ($pnl/$ticks), //PnL per Lot / Ticks
+                'Value'           => $value = ($ticks == 0 ? 0: ($pnl/$ticks)), //PnL per Lot / Ticks
                 'TP_Ticks'        => $TP =  $result->entry_price % $result->t_p, // Difference Entry price and T/P
                 'SL_Ticks'        => $result->entry_price % $result->s_l, //Difference between Entry price and S/L
                   ///////////
@@ -42,7 +42,7 @@ class StatisticsController extends Controller
             ];
         });
 
-        //dd($result);
+        dd($result);
         
         return view('admin.Statistics.index')->withResult($result);
     }

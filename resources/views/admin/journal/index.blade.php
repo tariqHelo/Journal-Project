@@ -53,7 +53,7 @@
                             @foreach ($journals as $key => $journal)
                                 <tr> 
                                     <td>{{++$key}}</td>
-                                    <td>{{$journal->entry_date}}</td>
+                                    <td >{{$journal->entry_date}}</td>
                                     <td>{{$journal->exit_date}}</td>
                                     <td>{{$journal->position_nr}}</td>
                                     <td>{{$journal->symbol}}</td>

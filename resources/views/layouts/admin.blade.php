@@ -5,7 +5,7 @@
 	<!--begin::Head-->
 	<head><base href="">
 		<meta charset="utf-8" />
-		<title>Race Dashboard</title>
+		<title>Journal Dashboard</title>
 		<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets." />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -583,7 +583,7 @@
 												<!--end::Card-->
 											</div>
 											{{-- Bar Chart Trade Distribution by Day of Week --}}
-											{{-- <div class="col-lg-6">
+											<div class="col-lg-6">
 												<!--begin::Card-->
 												<div class="card card-custom gutter-b">
 													<div class="card-header">
@@ -593,12 +593,12 @@
 													</div>
 													<div class="card-body">
 														<!--begin::Chart-->
-														<canvas id="bar4"></canvas>
+														<canvas id="myChart7"></canvas>
 														<!--end::Chart-->
 													</div>
 												</div>
 												<!--end::Card-->
-											</div> --}}
+											</div>
 											{{-- Bar Chart Performance by Day of Week --}}
 											{{-- <div class="col-lg-6">
 												<!--begin::Card-->
@@ -714,6 +714,8 @@
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{asset('assets/admin/crud/forms/widgets/select2.js')}}"></script>
 		<!--end::Page Scripts-->
+		<!--begin::Page Scripts(used by this page)-->
+		<script src="{{asset('assets/admin/js/pages/features/calendar/basic.js')}}"></script>
 		<!--end::Page Scripts-->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		@yield('js')
@@ -728,19 +730,20 @@
 			var Neg = app.CountNeg, Pos = app.CountPos , Sell = app.sal , Buy = app.buy
 			 POSBUY = app.POSBUY ,NEGBUY = app.NEGBUY ,POSSEL = app.POSSEL ,NEGSEL = app.NEGSEL ,
 			  AVGPos = app.AVGPos , AVGNeg = app.AVGNeg , max = app.max , min = app.min
-
-		     const ctx = document.getElementById('myChart1').getContext('2d');
-			 const ctx1 = document.getElementById('myChart2').getContext('2d');
-			 const ctx2 = document.getElementById('myChart3').getContext('2d');
+		    const ctx = document.getElementById('myChart1').getContext('2d');
+			const ctx1 = document.getElementById('myChart2').getContext('2d');
+			const ctx2 = document.getElementById('myChart3').getContext('2d');
 			const ctx3 = document.getElementById('myChart4').getContext('2d');
 			const ctx4 = document.getElementById('myChart5').getContext('2d');
 			const ctx5 = document.getElementById('myChart6').getContext('2d');
+			const ctx6 = document.getElementById('myChart7').getContext('2d');
 			let type = ['bar','pie','doughnut'];
-			// let labels = ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'];
-			let labels = ['Positive','Negative'];
+			 label= ['My First Dataset']
+			 labels = ['Positive','Negative'];
 			let labels1 = ['+Buy','-Buy','+Sell','-Sell'];
 			let labels2 = ['Buy','Sell'];
 			let labels3 = ['MAX','MIN'];
+			let labels4 = ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'];
 			backgroundColor1 = ['rgb(54, 162, 235)','rgb(255, 99, 132)']
 			backgroundColor2= ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)','rgb(238,130,238)']
 			// const data = {
@@ -750,7 +753,6 @@
 			const data1 = {
 					labels: labels,
 					  datasets: [{
-                        // label: 'My First Dataset',
                         data: [Pos,Neg],
                         backgroundColor: backgroundColor1
 					}]
@@ -772,6 +774,7 @@
 			const data4 = {
 					labels: labels,
 					  datasets: [{
+						label: label,
                         data: [AVGPos,AVGNeg],
                         backgroundColor: backgroundColor1
 					}]
@@ -779,6 +782,7 @@
 			const data5 = {
 					labels: labels2,
 					  datasets: [{
+						label: label,
                         data: [POSBUY+NEGBUY,POSSEL+NEGSEL],
                         backgroundColor: backgroundColor1
 					}]
@@ -786,8 +790,25 @@
 			const data6 = {
 					labels: labels3,
 					  datasets: [{
+						label: label,
                         data: [max,min],
                         backgroundColor: backgroundColor2
+					}]
+				};
+		 const data7 = {
+					labels: ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'],
+					  datasets: [{
+						 label: 'Distribution Dataset',
+                        data: [20,30 , 30 , 40 , 60 , 80],
+                        backgroundColor: [
+								    'rgb(255, 99, 132)',
+									'rgb(75, 192, 192)',
+									'rgb(255, 205, 86)',
+									'rgb(201, 203, 207)',
+									'rgb(54, 162, 235)',
+									'rgb(138,43,226)',
+							],
+				    borderColor: 'rgb(255, 99, 132)',
 					}]
 				};
 			var myChart1 = createChart(ctx,type[1], data1)
@@ -796,6 +817,7 @@
 			var myChart4 = createChart(ctx3,type[0], data4)
 			var myChart5 = createChart(ctx4,type[0], data5)
 			var myChart6 = createChart(ctx5,type[0], data6)
+			var myChart7 = createChart(ctx6,type[0], data7)
 			function createChart(ctx,bar, data) {
               return new Chart(ctx, {
                 type: bar,

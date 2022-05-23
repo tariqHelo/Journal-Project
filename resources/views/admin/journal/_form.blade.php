@@ -3,7 +3,7 @@
     <div class="form-group row">
         <label for="example-datetime-local-input" class="col-2 col-form-label">Entry Date and time</label>
         <div class="col-10">
-            <input class="form-control" type="datetime-local" name="entry_date" value="{{ old('entry_date', $journal->entry_date) }}" required/>
+            <input class="form-control" type="date" name="entry_date" value="{{ old('entry_date', $journal->entry_date) }}" required/>
         </div>
     </div>
     <div class="form-group row">
@@ -15,12 +15,12 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">Symbol</label>
         <div class="col-10">
-            <select name="symbol"  class="form-control form-control-lg"  required>
+            <select name="symbol" class="form-control form-control-lg"  required>
                 <option value="0">-- Choose Symbol Type --</option>
-                <option >EURUSD</option>
-                <option>GBPUSD</option>
-                <option>RSD</option>
-                <option>BND</option>
+                <option value="EURUSD">EURUSD</option>
+                <option value="GBPUSD">GBPUSD</option>
+                <option value="RSD">RSD</option>
+                <option value="BND">BND</option>
             </select>
         </div>
     </div>
@@ -61,8 +61,9 @@
     <div class="form-group row">
         <label for="example-date-input" class="col-2 col-form-label">Exit Date and time</label>
         <div class="col-10">
-            <input class="form-control" type="datetime-local" name="exit_date" value="{{ old('exit_date', $journal->exit_date) }}"  required/>
+            <input class="form-control" type="date" name="exit_date" value="{{ old('exit_date', $journal->exit_date) }}"  required/>
         </div>
+        {{-- datetime-local --}}
     </div>
     <div class="form-group row">
         <label class="col-2 col-form-label">Exit Price</label>
