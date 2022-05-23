@@ -33,7 +33,7 @@ class UsersController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     { 
         //$user = User::create($request->all());
         $user = User::create([

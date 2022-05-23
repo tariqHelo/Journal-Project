@@ -55,7 +55,7 @@ class DashboardController extends Controller
         //  }
         // dd($of_weeks);
          $day =  [
-             'lebles' => ['January','February','March','April','May','June'],
+             'lebles' => ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'],
              'datasets' => [
                   	'label'=> 'Trade Distribution by Day of Week',
 					'backgroundColor'=> ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)'],
@@ -70,25 +70,23 @@ class DashboardController extends Controller
                 'sum' => $d->sum('profit')
             ];
         });
-         $result = collect($q->get())->values()->map(function ($result, $key)  {
-             return  [
-                 // $result->size == 0 ? 0 :($result->profit / $result->size)
-                 'key'             => ++$key,
-                'entry_date'      => $result->entry_date,
-                'pnL_per_lot'     => ($result->profit / $result->size) == 0 ? 0 : $pnl = ($result->profit / $result->size)   , //Profit / Size
-                'ticks'           => $ticks = ($result->entry_price % $result->exit_price),//Difference between Entry Price and Exit Price 
-                'Value'           => ($pnl/$ticks)== 0 ? 0: $value = ($pnl/$ticks), //PnL per Lot / Ticks
-                'TP_Ticks'        => $TP =  $result->entry_price % $result->t_p, // Difference Entry price and T/P
-                'SL_Ticks'        => $result->entry_price % $result->s_l, //Difference between Entry price and S/L
-                  ///////////
-                'Risk/Reward'         => round($result->size * $value * $TP / $result->size * $value,2), // Planned Profit / $ Risk
-                'R'                   => round($result->profit / $result->size * $value,2),// $-Profit / $-Risk
-                'Risk'                => round($result->size * $value,2), //Size * Value * Risk Ricks
-                'Planned'             => round($result->size * $value * $TP,2), //Size * Value * TP Ticks
-                'Profit'              => round($result->profit,2), // Entered by User
-             ];
-         });
-     //dd($result);
+        //  $result = collect($q->get())->values()->map(function ($result)  {
+        //      return  [
+        //          // $result->size == 0 ? 0 :($result->profit / $result->size)
+        //         'pnL_per_lot'     => ($result->profit / $result->size) == 0 ? 0 : $pnl = ($result->profit / $result->size)   , //Profit / Size
+        //         'ticks'           => $ticks = ($result->entry_price % $result->exit_price),//Difference between Entry Price and Exit Price 
+        //         'Value'           => ($pnl/$ticks)== 0 ? 0: $value = ($pnl/$ticks), //PnL per Lot / Ticks
+        //         'TP_Ticks'        => $TP =  $result->entry_price % $result->t_p, // Difference Entry price and T/P
+        //         'SL_Ticks'        => $result->entry_price % $result->s_l, //Difference between Entry price and S/L
+        //           ///////////
+        //         'Risk/Reward'         => ($result->size * $value * $TP / $result->size * $value), // Planned Profit / $ Risk
+        //         'R'                   => ($result->profit / $result->size * $value),// $-Profit / $-Risk
+        //         'Risk'                => ($result->size * $value), //Size * Value * Risk Ricks
+        //         'Planned'             => ($result->size * $value * $TP), //Size * Value * TP Ticks
+        //         'Profit'              => ($result->profit), // Entered by User
+        //      ];
+        //  });
+    // dd($result);
         return view('layouts.admin')
         ->withProfit($profit)
         ->withDay($day)
