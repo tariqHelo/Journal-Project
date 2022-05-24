@@ -93,7 +93,7 @@
                 <div class="menu-submenu">
                     <i class="menu-arrow"></i>
                     <ul class="menu-subnav">
-                       {{-- @can('show_info') --}}
+                    @can('journal_info')
                          <li class="menu-item" aria-haspopup="true">
                             <a href="{{route('journal.index')}}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
@@ -101,7 +101,8 @@
                                 </i>
                                 <span class="menu-text">journal information</span>
                             </a>
-                         </li>  
+                         </li>
+                     @endcan  
                      @can('Calender')
                           <li class="menu-item" aria-haspopup="true">
                             <a href="{{url('/test')}}" class="menu-link">
