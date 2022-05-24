@@ -50,7 +50,11 @@ class DashboardController extends Controller
                  'sum' => $d->sum('profit'),
              ];
          });
-        //  $data = [];
+
+         $count_data =$of_weeks->pluck('count');
+         $sum_data =$of_weeks->pluck('sum');
+
+             //  $data = [];
         //  foreach($of_weeks as $day){
         //    $data[] = $day;
         //  }
