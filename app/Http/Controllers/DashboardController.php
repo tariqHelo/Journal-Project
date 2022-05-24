@@ -38,6 +38,7 @@ class DashboardController extends Controller
              ->first(); 
       // dd($profit);
          //$AvgD = Journal::active()->avg('profit');
+         $daily = $q->whereDate('created_at',today())->get();
          $day = Journal::orderBy('entry_date')->get()->groupBy(function($item) {
             return [
                   'count_of_day' => $item->created_at->format('l'),
@@ -70,7 +71,7 @@ class DashboardController extends Controller
                 'sum' => $d->sum('profit')
             ];
         });
-         $result = collect($q->get())->values()->map(function ($result)  {
+        $result = collect($q->get())->values()->map(function ($result)  {
              return  [
                  // $result->size == 0 ? 0 :($result->profit / $result->size)
                 'pnL_per_lot'     => $pnl = ($result->size == 0 ? 0 :($result->profit / $result->size)), //Profit / Size
@@ -86,11 +87,14 @@ class DashboardController extends Controller
                 'Profit'              => round($result->profit,2), // Entered by User
              ];
          });
-    // dd($result);
+        // dd($daily->sum('profit') / $daily->count());
+     //dd($result->sum('R'),$result->avg('R'));
         return view('layouts.admin')
         ->withProfit($profit)
         ->withDay($day)
-        ->withSymbols($symbols);
+        ->withSymbols($symbols)
+        ->withResult($result)
+        ->withDaily($daily);
      //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 
              // Count of 5 Trades have positive Profit,
              // Count of 5 Trades have negative Profit —>

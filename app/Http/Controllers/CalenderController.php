@@ -17,6 +17,7 @@ class CalenderController extends Controller
     public function index()
     {
         $t = Carbon::now();
+       $profit = Journal::query()->count('profit');
        $data = Journal::query()->get()->groupBy(function($t) {
             return Carbon::parse($t->entry_date)->format('Y-m-d');
         });
@@ -37,9 +38,9 @@ class CalenderController extends Controller
                   //win rate 
             ];
         });
-        $rate = collect($data)->values()->map(function ($rate)  {
+        $rate = collect($data)->values()->map(function ($rate, $profit)  {
             return  [
-                    'title'     =>  'Win Rate'.':'. ' '.($rate->count() / $rate->sum('profit')).'%',
+                    'title'     =>  'Win Rate'.':'. ' '.round($profit/ $rate->count()).'%',
                 //    'title'     =>   'Win Rate'.':'. ' '.$rate->avg('profit') .'%',
                    'start'     => ($rate[0]->entry_date),
                    'className' => "fc-event-solid-info fc-event-success",
@@ -48,7 +49,7 @@ class CalenderController extends Controller
                   //win rate //Done
             ];
         });
-
+    //    $profit->CountPos/ ($profit->CountNeg + $profit->CountPos)*100
        $allItems = $events->merge($pnl)->merge($rate);
        // return($allItems);
        return response()->json(['events' => $allItems]);

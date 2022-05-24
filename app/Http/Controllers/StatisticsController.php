@@ -38,11 +38,13 @@ class StatisticsController extends Controller
                 'R'                   => round($result->profit / $result->size * $value,2),// $-Profit / $-Risk
                 'Risk'                => round($result->size * $value,2), //Size * Value * Risk Ricks
                 'Planned'             => round($result->size * $value * $TP,2), //Size * Value * TP Ticks
-                'Profit'              => round($result->profit,2), // Entered by User
+                'Profit'              => $result->profit, // Entered by User
             ];
         });
 
-        //dd($result);
+      //  $sum_r = $result->sum('R');
+
+      //  dd($sum_r);
         
         return view('admin.Statistics.index')->withResult($result);
     }
