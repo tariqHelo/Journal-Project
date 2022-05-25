@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
     PermissionsController,
     RolesController,
-    UsersController,
+    UsersController
 };
 use App\Http\Controllers\{
     JournalController,
@@ -27,13 +27,20 @@ use App\Http\Controllers\{
 |
 */
 
-//    Route::get('/', [DashboardController::class , 'index'])->name('dashboard');
 
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
 
 Route::group(['middleware' => 'auth'] , function () {
 
-   Route::get('/',[DashboardController::class , 'index'])->name('dashboard');
+    Route::get('/dashboard', function () {
+     return redirect('/home');
+    });
 
+    
+    Route::get('/home',[DashboardController::class , 'index'])->name('dashboard');
 
     Route::get('/test', function () {
      return view('admin.calender.index');
@@ -55,4 +62,6 @@ Route::group(['middleware' => 'auth'] , function () {
      // statistics
     Route::resource('statistics', StatisticsController::class);
 }); 
+
+
 require __DIR__.'/auth.php';

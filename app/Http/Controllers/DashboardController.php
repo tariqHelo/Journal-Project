@@ -6,7 +6,14 @@ use App\Models\Journal;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
-{
+{   
+
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -66,7 +73,7 @@ class DashboardController extends Controller
         $ssum =$symbols->pluck('sum');
         //dd($keys);
 
-        $result = collect($q->get())->values()->map(function ($result)  {
+        $result = collect(Journal::query()->get())->values()->map(function ($result)  {
              return  [
              //   'id'          => $result->id, 
                 'pnL_per_lot'     => $pnl = ($result->size == 0 ? 0 :($result->profit / $result->size)), //Profit / Size
@@ -82,7 +89,7 @@ class DashboardController extends Controller
                 'Profit'              => ($result->profit), // Entered by User
              ];
          });
-       //  dd($result);
+        // dd($result->sum('R') ,$result->avg('R') );
         return view('layouts.admin')
         ->withProfit($profit)
         ->withResult($result)

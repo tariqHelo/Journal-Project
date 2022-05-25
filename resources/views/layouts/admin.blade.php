@@ -305,7 +305,7 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total R</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{number_format($result->sum('R')) ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{($result->sum('R')) ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -316,7 +316,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average R:R</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{number_format($result->avg('R')) ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{($result->avg('R')) ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>

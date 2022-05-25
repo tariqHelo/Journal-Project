@@ -49,12 +49,7 @@ class CalenderController extends Controller
                   //win rate //Done
             ];
         });
-    //    $profit->CountPos/ ($profit->CountNeg + $profit->CountPos)*100
        $allItems = $events->merge($pnl)->merge($rate);
-       // return($allItems);
-
-        $daily_win_rate = Journal::query()->whereDate('created_at',today())->get();
-        dd($daily_win_rate->where('profit' , '>' , 0)->count() / $daily_win_rate->count());
        return response()->json(['events' => $allItems]);
        //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 
              // Count of 5 Trades have positive Profit,
