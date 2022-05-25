@@ -14,14 +14,7 @@ class StatisticsController extends Controller
      */
     public function index()
     {   
-           $data =  Journal::query()->get();
-          // dd($data);
-        //   ->select('size' ,'profit', 'exit_price' , 'entry_price' ,'s_l' ,'t_p')
-        //    $pnL   = $data->profit / $data->size;
-        //    $ticks = $data->entry_price % $data->exit_price;
-        //    $TP_Ticks =  $calc->entry_price % $calc->t_p;
-           
-           
+           $data =  Journal::query()->get();         
 
          $result = collect($data)->values()->map(function ($result, $key)  {
             return  [

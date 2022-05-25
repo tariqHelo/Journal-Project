@@ -27,9 +27,12 @@ use App\Http\Controllers\{
 |
 */
 
+//    Route::get('/', [DashboardController::class , 'index'])->name('dashboard');
+
+
 Route::group(['middleware' => 'auth'] , function () {
 
-    Route::get('/', [DashboardController::class , 'index'])->name('dashboard');
+   Route::get('/',[DashboardController::class , 'index'])->name('dashboard');
 
 
     Route::get('/test', function () {

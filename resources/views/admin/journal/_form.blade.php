@@ -15,12 +15,11 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">Symbol</label>
         <div class="col-10">
-            <select name="symbol" class="form-control form-control-lg"  required>
+            <select name="symbol" class="form-control form-control-lg" required>
                 <option value="0">-- Choose Symbol Type --</option>
-                <option value="EURUSD">EURUSD</option>
-                <option value="GBPUSD">GBPUSD</option>
-                <option value="RSD">RSD</option>
-                <option value="BND">BND</option>
+                 @foreach($symbols as $id => $symbols)
+                  <option value="{{ $id }}" {{ (in_array($id, old('symbols', [])) || $journal->symbol) ? 'selected' : '' }}>{{ $symbols }}</option>               
+                 @endforeach
             </select>
         </div>
     </div>
@@ -29,8 +28,9 @@
         <div class="col-10">
             <select name="type" class="form-control form-control-lg"  required>
                 <option value="0">-- Choose Type Type --</option>
-                <option value="buy">Buy</option>
-                <option value="sel">Sel</option>
+                 @foreach($types as $id => $types)
+                  <option value="{{ $id }}" {{ (in_array($id, old('types', [])) || $journal->type) ? 'selected' : '' }}>{{ $types }}</option>               
+                 @endforeach
             </select>
         </div>
     </div>

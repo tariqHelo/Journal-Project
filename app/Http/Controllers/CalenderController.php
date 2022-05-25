@@ -17,7 +17,7 @@ class CalenderController extends Controller
     public function index()
     {
         $t = Carbon::now();
-       $profit = Journal::query()->count('profit');
+
        $data = Journal::query()->get()->groupBy(function($t) {
             return Carbon::parse($t->entry_date)->format('Y-m-d');
         });
@@ -38,9 +38,9 @@ class CalenderController extends Controller
                   //win rate 
             ];
         });
-        $rate = collect($data)->values()->map(function ($rate, $profit)  {
+        $rate = collect($data)->values()->map(function ($rate)  {
             return  [
-                    'title'     =>  'Win Rate'.':'. ' '.round($profit/ $rate->count()).'%',
+                    'title'     =>  'Win Rate'.':'. ' '.($rate->where('profit' , '>' , 0)->count()/$rate->count())*100 .'%',
                 //    'title'     =>   'Win Rate'.':'. ' '.$rate->avg('profit') .'%',
                    'start'     => ($rate[0]->entry_date),
                    'className' => "fc-event-solid-info fc-event-success",
@@ -57,71 +57,5 @@ class CalenderController extends Controller
              // Count of 5 Trades have positive Profit,
              // Count of 5 Trades have negative Profit —>
              // Win Rate = 50% // Same for the Calendar, just for the specific Date 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

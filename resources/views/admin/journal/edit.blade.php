@@ -16,7 +16,7 @@
                 <h3 class="card-title">Journal Form</h3>
             </div> --}}
             <!--begin::Form-->
-            <form method="PUT" action="{{route('journal.create' ,$journal->id )}}">
+            <form  action="{{route('journal.update' ,$journal->id )}}" method="post">
                @csrf
                @method('PUT')
                @include('admin.journal._form', [

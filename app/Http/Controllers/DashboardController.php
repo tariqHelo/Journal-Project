@@ -14,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {   
+       // dd(20);
         $q = Journal::query();
         $profit = $q->toBase()
              ->selectRaw("SUM(profit) AS pnl")
@@ -34,10 +35,7 @@ class DashboardController extends Controller
              ->selectRaw("count(case when profit > 0 then 1 end) as CountPos")
              ->selectRaw("AVG(CASE WHEN profit > 0 THEN profit ELSE 0 END) as AVGPos")
              ->selectRaw("AVG(CASE WHEN profit < 0 THEN profit ELSE 0 END) as AVGNeg")
-            //  ->selectRaw("CAST(count(case when profit > 0 then 1 end)/count(*)*100 AS INTEGER) as a")
              ->first(); 
-      // dd($profit);
-         //$AvgD = Journal::active()->avg('profit');
          $daily = $q->whereDate('created_at',today())->get();
          $day = Journal::orderBy('entry_date')->get()->groupBy(function($item) {
             return [
@@ -50,30 +48,27 @@ class DashboardController extends Controller
                  'sum' => $d->sum('profit'),
              ];
          });
-        //  $data = [];
-        //  foreach($of_weeks as $day){
-        //    $data[] = $day;
-        //  }
-        // dd($of_weeks);
-         $day =  [
-             'lebles' => ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'],
-             'datasets' => [
-                  	'label'=> 'Trade Distribution by Day of Week',
-					'backgroundColor'=> ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)'],
-					'borderColor'=> 'rgb(255, 99, 132)',
-					'data'=> [0, 10, 5, 2, 20, 30]
-              ], 
-         ];            
-        $symbols = $q->get()->groupBy('symbol')->map(function ($d) {
+        $days = $of_weeks->keys();
+        $count =$of_weeks->pluck('count');
+        $sum =  $of_weeks->pluck('sum');
+
+                   
+        $symbols = Journal::get()->groupBy('symbol')->map(function ($d) {
             return [
                 'count' => $d->count(),
                 'key' => $d[0]->symbol,
                 'sum' => $d->sum('profit')
             ];
         });
+       // dd($symbols);
+        $keys = $symbols->keys();
+        $scount =$symbols->pluck('count');
+        $ssum =$symbols->pluck('sum');
+        //dd($keys);
+
         $result = collect($q->get())->values()->map(function ($result)  {
              return  [
-                 // $result->size == 0 ? 0 :($result->profit / $result->size)
+             //   'id'          => $result->id, 
                 'pnL_per_lot'     => $pnl = ($result->size == 0 ? 0 :($result->profit / $result->size)), //Profit / Size
                 'ticks'           => $ticks = ($result->entry_price % $result->exit_price),//Difference between Entry Price and Exit Price 
                 'Value'           => $value = ($ticks == 0 ? 0: ($pnl/$ticks)), //PnL per Lot / Ticks
@@ -84,17 +79,21 @@ class DashboardController extends Controller
                 'R'                   => round($result->profit / $result->size * $value,2),// $-Profit / $-Risk
                 'Risk'                => round($result->size * $value,2), //Size * Value * Risk Ricks
                 'Planned'             => round($result->size * $value * $TP,2), //Size * Value * TP Ticks
-                'Profit'              => round($result->profit,2), // Entered by User
+                'Profit'              => ($result->profit), // Entered by User
              ];
          });
-        // dd($daily->sum('profit') / $daily->count());
-     //dd($result->sum('R'),$result->avg('R'));
+       //  dd($result);
         return view('layouts.admin')
         ->withProfit($profit)
-        ->withDay($day)
-        ->withSymbols($symbols)
         ->withResult($result)
-        ->withDaily($daily);
+        ->withDaily($daily)
+        ->withDays($days)
+        ->withCount($count)
+        ->withSum($sum)
+        ->withKeys($keys)
+        ->withScount($scount)
+        ->withSsum($ssum);
+
      //win rate => // % of Quantity positive Trades vs Negative Trades (Positive Profit vs Negative Profit) 
              // Count of 5 Trades have positive Profit,
              // Count of 5 Trades have negative Profit —>
@@ -107,82 +106,5 @@ class DashboardController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
 
-        return view('admin.statistics.index');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
-//    $events=[
-//        ['title' => 'All Day Event','start' => '2022-05-12' , 'className' => "fc-event-danger fc-event-solid-warning"],
-//        ['title' => 'ss','start' => '2022-05-12'],
-//        ['title' => 'Count2','start' => '2022-05-08'],
-//        ['title' => 'Count3','start' => '2022-05-07'],
-//        ['title' => 'Count4','start' => '2022-05-03'],
-//        ['title' => 'Count5','start' => '2022-05-02'],
-//        ['title' => 'Count6','start' => '2022-05-01'],
-//        ['title' => 'Count7','start' => '2022-05-10'],
-//        ['title' => 'Count8','start' => '2022-05-09'],
-//        ['title' => 'Count9','start' => '2022-05-08'],
-//    ];

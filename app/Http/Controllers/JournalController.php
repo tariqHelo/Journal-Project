@@ -28,9 +28,14 @@ class JournalController extends Controller
      */
     public function create()
     {   
-
+        
+        $symbols = ['EURUSD' , 'GBPUSD'];
+       // dd($symbols);
+         $types = [ 'buy' , 'sal'];
         return view('admin.journal.create',[
-            'journal' => new Journal()
+            'journal' => new Journal(),
+             'symbols' => $symbols,
+              'types' => $types
         ]);
     }
 
@@ -66,9 +71,15 @@ class JournalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Journal $journal)
-    {
-        return view('admin.journal.edit')
-        ->withJournal($journal);
+    {   
+         $symbols = ['EURUSD' , 'GBPUSD'];
+         $types = [ 'buy' , 'sal'];
+         return view('admin.journal.edit',[
+              'journal' => $journal,
+              'symbols' => $symbols,
+              'types' => $types  ,
+         ]);
+  
     }
 
     /**

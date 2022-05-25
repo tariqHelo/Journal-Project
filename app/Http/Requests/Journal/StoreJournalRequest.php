@@ -24,12 +24,12 @@ class StoreJournalRequest extends FormRequest
       public function rules()
     {
         return [
-         'entry_date'     => 'required|date|after:tomorrow',
+         'entry_date'     => 'required|date|after:today',
          'exit_date'      => 'required|date',
          'position_nr'    => 'numeric|min:0',
-         'symbol'         => 'required|not_in:-- Choose Symbol Type --',
+         'symbol'         => 'required|not_in:0',
          'size'           => 'numeric',
-         'type'           => 'required|not_in:-- Choose Type Type --',
+         'type'           => 'required|not_in:0',
          'entry_price'    => 'numeric',
          's_l'            => 'numeric',
          't_p'            => 'numeric',

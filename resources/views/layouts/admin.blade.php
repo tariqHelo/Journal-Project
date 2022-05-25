@@ -258,7 +258,7 @@
 												<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(https://income.bti.ps/assets/media/svg/shapes/abstract-2.svg)">
 													<!--begin::Body-->
 													<div class="card-body">
-														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Total Profit</h5>
+														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">TotalProfit</h5>
 														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">${{number_format($profit->SumPos) ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
@@ -282,7 +282,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Win Rate</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.round($profit->CountPos/ ($profit->CountNeg + $profit->CountPos))*100 ?? "0")}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{'%'.number_format($profit->CountPos == 0 ? 0 :($profit->CountPos/ ($profit->CountNeg + $profit->CountPos))*100 ?? "0")}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -316,7 +316,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average R:R</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{round($result->avg('R')) ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{number_format($result->avg('R')) ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -327,7 +327,7 @@
 													<!--begin::Body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average PnL per Trade</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{round($result->avg('Profit')) ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{number_format($profit->AvgPnl) ?? "0"}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -339,7 +339,7 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average Daily PnL</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$daily->count() == 0 ? 0 : ($daily->sum('profit')/ $daily->count())}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$daily->count() == 0 ? 0 : number_format($daily->sum('profit')/ $daily->count())}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -351,7 +351,7 @@
 													<!--begin::body-->
 													<div class="card-body">
 														<h5 class="card-title font-weight-bolder text-muted text-hover-dark" style="font-size: 28px !important;">Average Trade PnL</h5>
-														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{round($profit->pnl/ $profit->trades,2) ?? "0"}}</p>
+														<p class="text-dark-75 font-weight-boldest  m-0" style="font-size: 40px !important;">{{$profit->pnl == 0 ? 0 :number_format($profit->pnl/ $profit->trades ?? "0")}}</p>
 													</div>
 													<!--end::Body-->
 												</div>
@@ -724,8 +724,13 @@
 			placeholder: "Select a state",
 			});
 			var app = {{ Illuminate\Support\Js::from($profit ?? "") }};
-			var days = {{ Illuminate\Support\Js::from($day ?? "") }};
-			console.log(days.datasets);
+			var days = {{ Illuminate\Support\Js::from($days ?? "") }};
+			var count = {{ Illuminate\Support\Js::from($count ?? "") }};
+			var sum = {{ Illuminate\Support\Js::from($sum ?? "") }};
+			var symbols = {{ Illuminate\Support\Js::from($keys ?? "") }};
+			var scount = {{ Illuminate\Support\Js::from($scount ?? "") }};
+			var ssum = {{ Illuminate\Support\Js::from($ssum ?? "") }};
+			console.log(scount);
 			var Neg = app.CountNeg, Pos = app.CountPos , Sell = app.sal , Buy = app.buy
 			 POSBUY = app.POSBUY ,NEGBUY = app.NEGBUY ,POSSEL = app.POSSEL ,NEGSEL = app.NEGSEL ,
 			  AVGPos = app.AVGPos , AVGNeg = app.AVGNeg , max = app.max , min = app.min
@@ -746,7 +751,7 @@
 			let labels1 = ['+Buy','-Buy','+Sell','-Sell'];
 			let labels2 = ['Buy','Sell'];
 			let labels3 = ['MAX','MIN'];
-			let labels4 = ['Saturday','Sunday','Monday','Tuesday','Wednesday','Thursday'];
+			let labels4 = days;
 			backgroundColor1 = ['rgb(54, 162, 235)','rgb(255, 99, 132)']
 			backgroundColor2= ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)','rgb(238,130,238)']
 			// const data = {
@@ -802,7 +807,7 @@
 					labels: labels4,
 					  datasets: [{
 						 label: 'Distribution Dataset',
-                        data: [20,30 , 30 , 40 , 60 , 80],
+                        data: count,
                         backgroundColor: [
 								    'rgb(255, 99, 132)',
 									'rgb(75, 192, 192)',
@@ -818,7 +823,7 @@
 					labels: labels4,
 					  datasets: [{
 						 label: 'SUM Dataset',
-                        data: [20,30 , 30 , 40 , 60 , 80],
+                        data: sum,
                         backgroundColor: [
 								    'rgb(255, 99, 132)',
 									'rgb(75, 192, 192)',
@@ -831,10 +836,10 @@
 					}]
 				};
 			const data9 = {
-					labels: ['THB','SOS','MYR','CDF','WST','CLP','HKD','KMF','ISK'],
+					labels: symbols,
 					  datasets: [{
 						 label: 'Count Symbol Dataset',
-                        data: [20,30 , 30 , 40,20,30 , 30 , 40 , 60 , 80],
+                        data: scount,
                         backgroundColor: [
 								    'rgb(255,0,0)',
 									'rgb(128,0,0)',
@@ -846,10 +851,10 @@
 					}]
 				};
 			const data10 = {
-					labels: ['THB','SOS','MYR','CDF','WST','CLP','HKD','KMF','ISK'],
+					labels: symbols,
 					  datasets: [{
 						 label: 'Sum Symbol Dataset',
-                        data: [20,30 , 30 , 40,20,30 , 30 , 40 , 60 , 80],
+                        data: ssum,
                         backgroundColor: [
 								    'rgb(255,160,122)',
 									'rgb(240,230,140)',
